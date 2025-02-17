@@ -1,6 +1,6 @@
 <?php 
 
-require_once '../config/config.php';
+require_once 'config.php';
 
 
 function postArticle($name, $slug, $description, $price) {
@@ -58,7 +58,7 @@ function getArticleById($id) {
 
 
 
-postArticle("Guitare", "instrument", "instrument de musique", 100);
+//postArticle("Guitare", "instrument", "instrument de musique", 100);
 
 
 ?>

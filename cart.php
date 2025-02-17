@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -19,102 +20,62 @@
         
         <div class="cart-content">
             <div class="cart-items">
+
+                <?php
+
+                    require_once 'api/cart.php';
+
+                    $cart = getCart();
+
+                    $total = 0;
+
+                    foreach ($cart as $article):
+                        $total += $article['Price']*$_SESSION["cart"][$article["Id"]]["quantity"];
+                ?>
                 <!-- Cart item 1 -->
                 <div class="cart-item">
                     <div class="cart-item-image">
                         <img src="images/test_image.jpg" alt="Chemise blanche élégante">
                     </div>
                     <div class="cart-item-details">
-                        <h3 class="cart-item-name">Chemise blanche élégante</h3>
-                        <p class="cart-item-price">39.99€</p>
+                        <h3 class="cart-item-name"><?= $article["Name"] ?></h3>
+                        <p class="cart-item-price"><?= $article["Price"] ?> €</p>
                         <div class="cart-item-quantity">
-                            <button class="quantity-btn minus">-</button>
-                            <input type="text" value="1" min="1" class="quantity-input" disabled>
-                            <button class="quantity-btn plus">+</button>
+                            <form method="post" action="api/cart.php">
+                                <input type="hidden" name="path" value="/cart.php" ?>
+                                <?= '<input type="hidden" name="quantity" value="' . htmlspecialchars($_SESSION["cart"][$article["Id"]]["quantity"]-1) . '">' ?>
+                                <?= '<input type="hidden" name="product_id" value="' . htmlspecialchars($article['Id']) . '">' ?>
+                                <button class="quantity-btn minus" name="action" value="update_cart">-</button>
+                            </form>
+                            <?= '<input type="text" value="' . $_SESSION["cart"][$article["Id"]]["quantity"] . '" min="1" class="quantity-input" disabled>' ?>
+                            <form method="post" action="api/cart.php">
+                                <input type="hidden" name="path" value="/cart.php" ?>
+                                <?= '<input type="hidden" name="product_id" value="' . htmlspecialchars($article['Id']) . '">' ?>
+                                <button class="quantity-btn plus" name="action" value="add_to_cart">+</button>
+                            </form>
                         </div>
                     </div>
                     <div class="cart-item-subtotal">
-                        <p>39.99€</p>
+                        <p><?= $article["Price"]*$_SESSION["cart"][$article["Id"]]["quantity"] ?> €</p>
                     </div>
-                    <button class="remove-item">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
+                    <form method="post" action="api/cart.php">
+                        <input type="hidden" name="path" value="/cart.php" ?>
+                        <?= '<input type="hidden" name="product_id" value="' . htmlspecialchars($article['Id']) . '">' ?>
+                        <button class="remove-item" name="action" value="remove_from_cart"><i class="fas fa-trash-alt"></i></button>
+                    </form>
+                    
                 </div>
-                
-                <!-- Cart item 2 -->
-                <div class="cart-item">
-                    <div class="cart-item-image">
-                        <img src="images/test_image.jpg" alt="Écouteurs sans fil premium">
-                    </div>
-                    <div class="cart-item-details">
-                        <h3 class="cart-item-name">Écouteurs sans fil premium</h3>
-                        <p class="cart-item-price">129.99€</p>
-                        <div class="cart-item-quantity">
-                            <button class="quantity-btn minus">-</button>
-                            <input type="text" value="1" min="1" class="quantity-input" disabled>
-                            <button class="quantity-btn plus">+</button>
-                        </div>
-                    </div>
-                    <div class="cart-item-subtotal">
-                        <p>129.99€</p>
-                    </div>
-                    <button class="remove-item">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
-                </div>
-                
-                <!-- Cart item 3 -->
-                <div class="cart-item">
-                    <div class="cart-item-image">
-                        <img src="images/test_image.jpg" alt="Lampe de bureau design">
-                    </div>
-                    <div class="cart-item-details">
-                        <h3 class="cart-item-name">Lampe de bureau design</h3>
-                        <p class="cart-item-price">59.99€</p>
-                        <div class="cart-item-quantity">
-                            <button class="quantity-btn minus">-</button>
-                            <input type="text" value="1" min="1" class="quantity-input" disabled>
-                            <button class="quantity-btn plus">+</button>
-                        </div>
-                    </div>
-                    <div class="cart-item-subtotal">
-                        <p>119.98€</p>
-                    </div>
-                    <button class="remove-item">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
-                </div>
-                
-                <!-- Cart item 4 -->
-                <div class="cart-item">
-                    <div class="cart-item-image">
-                        <img src="images/test_image.jpg" alt="Crème hydratante visage">
-                    </div>
-                    <div class="cart-item-details">
-                        <h3 class="cart-item-name">Crème hydratante visage</h3>
-                        <p class="cart-item-price">24.99€</p>
-                        <div class="cart-item-quantity">
-                            <button class="quantity-btn minus">-</button>
-                            <input type="text" value="1" min="1" class="quantity-input" disabled>
-                            <button class="quantity-btn plus">+</button>
-                        </div>
-                    </div>
-                    <div class="cart-item-subtotal">
-                        <p>24.99€</p>
-                    </div>
-                    <button class="remove-item">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
-                </div>
+
+                <?php endforeach; ?>
+
             </div>
-            
             <!-- Order summary -->
             <div class="order-summary">
                 <h2 class="summary-title">Récapitulatif</h2>
                 
                 <div class="summary-row">
                     <span>Sous-total</span>
-                    <span>314.95€</span>
+                    <span><?= $total ?> €</span>
                 </div>
                 
                 <div class="summary-row">
@@ -124,7 +85,7 @@
                 
                 <div class="summary-row total">
                     <span>Total</span>
-                    <span>314.95€</span>
+                    <span><?= $total ?> €</span>
                 </div>
                 
                 <div class="promo-code">
@@ -157,29 +118,22 @@
     
     <script>
         // Quantity buttons functionality
-        document.querySelectorAll('.quantity-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const input = this.parentNode.querySelector('.quantity-input');
-                const currentValue = parseInt(input.value);
+        // document.querySelectorAll('.quantity-btn').forEach(button => {
+        //     button.addEventListener('click', function() {
+        //         const input = this.parentNode.querySelector('.quantity-input');
+        //         const currentValue = parseInt(input.value);
                 
-                if (this.classList.contains('plus')) {
-                    input.value = currentValue + 1;
-                } else if (this.classList.contains('minus') && currentValue > 1) {
-                    input.value = currentValue - 1;
-                }
+        //         if (this.classList.contains('plus')) {
+        //             input.value = currentValue + 1;
+        //         } else if (this.classList.contains('minus') && currentValue > 1) {
+        //             input.value = currentValue - 1;
+        //         }
                 
-                // Here you would update the subtotal and total
-                // This is a placeholder for actual implementation
-            });
-        });
+        //         // Here you would update the subtotal and total
+        //         // This is a placeholder for actual implementation
+        //     });
+        // });
         
-        // Remove item functionality
-        document.querySelectorAll('.remove-item').forEach(button => {
-            button.addEventListener('click', function() {
-                this.closest('.cart-item').remove();
-                // Here you would update the cart count and totals
-            });
-        });
     </script>
 </body>
 </html>
