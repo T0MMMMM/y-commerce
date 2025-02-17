@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #fff;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background: none;
+    margin-bottom: 35px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.brand {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.search-input {
+    padding: 15px 40px 15px 15px;
+    width: 350px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    color: #777;
+    cursor: pointer;
+}
+
+.main-content {
+    display: flex;
+    padding: 100px 5% 20px 5%; /* Increased top padding for fixed navbar */
+    gap: 30px;
+}
+
+.filters {
+    width: 250px;
+    background-color: transparent; /* Changed to transparent */
+    padding: 0; /* Removed padding */
+    border-radius: 0; /* Removed border radius */
+    box-shadow: none; /* Removed box shadow */
+}
+
+.filter-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.filter-group {
+    margin-bottom: 15px; /* Reduced margin */
+    border: none;
+    background-color: transparent; /* Ensure transparency */
+}
+
+.filter-group-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    border: none;
+    background-color: transparent; /* Ensure transparency */
+}
+
+.filter-checkbox {
+    margin-right: 10px;
+    accent-color: #777;
+}
+
+.products {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); /* Increased box-shadow */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25); /* Even stronger shadow on hover */
+}
+
+.product-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 15px;
+}
+
+.product-name {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.product-price {
+    font-size: 14px; /* Smaller price size */
+    font-weight: bold;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.add-to-cart {
+    padding: 8px 15px;
+    background-color: #777;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart:hover {
+    background-color: #666;
+}
