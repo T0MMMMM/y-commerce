@@ -8,16 +8,7 @@
 </head>
 <body>
     <!-- Navigation bar -->
-    <nav class="navbar" id="navbar">
-        <div class="brand">y-commerce.</div>
-        <div class="search-bar">
-            <input type="text" class="search-input" placeholder="Rechercher un produit...">
-            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-        </div>
-    </nav>
+    <?php include "includes/navbar.php"; ?>
     
     <!-- Main content -->
     <div class="main-content">
@@ -88,8 +79,11 @@
             <div class="product-card">
                 <img src="images/test_image.jpg" alt="Produit 1" class="product-image">
                 <div class="product-info">
-                    <h3 class="product-name">Chemise blanche élégante</h3>
-                    <p class="product-price">39.99€</p>
+                    <div>
+                        <h3 class="product-name">Chemise blanche élégante</h3>
+                        <p class="product-price">39.99€</p>
+                    </div>
+                    
                     <button class="add-to-cart">Ajouter au panier</button>
                 </div>
             </div>
@@ -98,8 +92,11 @@
             <div class="product-card">
                 <img src="images/test_image.jpg" alt="Produit 2" class="product-image">
                 <div class="product-info">
-                    <h3 class="product-name">Écouteurs sans fil premium</h3>
-                    <p class="product-price">129.99€</p>
+                    <div>
+                        <h3 class="product-name">Écouteurs sans fil premium</h3>
+                        <p class="product-price">129.99€</p>
+                    </div>
+                    
                     <button class="add-to-cart">Ajouter au panier</button>
                 </div>
             </div>
@@ -108,8 +105,11 @@
             <div class="product-card">
                 <img src="images/test_image.jpg" alt="Produit 3" class="product-image">
                 <div class="product-info">
-                    <h3 class="product-name">Lampe de bureau design</h3>
-                    <p class="product-price">59.99€</p>
+                    <div>
+                        <h3 class="product-name">Lampe de bureau design</h3>
+                        <p class="product-price">59.99€</p>
+                    </div>
+                    
                     <button class="add-to-cart">Ajouter au panier</button>
                 </div>
             </div>
@@ -118,8 +118,11 @@
             <div class="product-card">
                 <img src="images/test_image.jpg" alt="Produit 4" class="product-image">
                 <div class="product-info">
-                    <h3 class="product-name">Crème hydratante visage</h3>
-                    <p class="product-price">24.99€</p>
+                    <div>
+                        <h3 class="product-name">Crème hydratante visage</h3>
+                        <p class="product-price">24.99€</p>
+                    </div>
+                    
                     <button class="add-to-cart">Ajouter au panier</button>
                 </div>
             </div>
@@ -128,8 +131,11 @@
             <div class="product-card">
                 <img src="images/test_image.jpg" alt="Produit 5" class="product-image">
                 <div class="product-info">
-                    <h3 class="product-name">Jean slim coupe moderne</h3>
-                    <p class="product-price">49.99€</p>
+                    <div>
+                        <h3 class="product-name">Jean slim coupe moderne</h3>
+                        <p class="product-price">49.99€</p>
+                    </div>
+                    
                     <button class="add-to-cart">Ajouter au panier</button>
                 </div>
             </div>
@@ -138,12 +144,17 @@
             <div class="product-card">
                 <img src="images/test_image.jpg" alt="Produit 6" class="product-image">
                 <div class="product-info">
-                    <h3 class="product-name">Montre connectée sport</h3>
-                    <p class="product-price">89.99€</p>
+                    <div>
+                        <h3 class="product-name">Montre connectée sport</h3>
+                        <p class="product-price">89.99€</p>
+                    </div>
+                    
                     <button class="add-to-cart">Ajouter au panier</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <?php include 'includes/footer.php'; ?>
 </body>
 </html>
