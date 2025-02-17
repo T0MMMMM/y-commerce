@@ -1,7 +1,7 @@
 <?php 
 
-require_once '../config/config.php';
-require_once '../crud/crud.php';
+require_once 'config.php';
+require_once 'crud.php';
 
 
 $test = json_encode(["role" => ["user"]]);
@@ -47,7 +47,7 @@ function login($Username, $Password) {
 
 
 //register("Victor","michel", $test);
-login("dylan", "saboteur97");
+//login("dylan", "saboteur97");
 
 
 

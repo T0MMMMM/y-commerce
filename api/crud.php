@@ -1,6 +1,6 @@
 <?php 
 
-require_once '../config/config.php';
+require_once 'config.php';
 
 
 function postArticle($name, $slug, $description, $price) {
@@ -81,10 +81,6 @@ function getArticleById($id) {
 
 
 
-
-
-
-
 function postUser($Username, $Password, $Role) {
     global $conn;
     $sql = "INSERT INTO user (Username, Password, Balance, Avatar, Role, Wishlist) VALUES (?, ?, ?, ?, ?, ?)";
@@ -109,6 +105,7 @@ $jsonData = json_encode([
 $role = json_encode([
     "role" => ["user"]
 ]);
+//postArticle("Guitare", "instrument", "instrument de musique", 100);
 
 
 ?>
