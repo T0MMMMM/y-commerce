@@ -46,8 +46,8 @@ function login($Username, $Password) {
 }
 
 
-register("Victor","michel", $test);
-//login("dylan", "saboteur97");
+//register("Victor","michel", $test);
+login("dylan", "saboteur97");
 
 
 
