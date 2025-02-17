@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -14,10 +15,14 @@
     <div class="auth-container">
         <div class="auth-card" id="login-card">
             <h2 class="auth-title">Connexion</h2>
-            <form class="auth-form" action="login_process.php" method="post">
+
+            <form class="auth-form" action="api/register.php" method="post">
+
+                <input type="hidden" name="action" value="login">
+
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Mot de passe</label>
@@ -31,18 +36,23 @@
                 <p class="auth-link">Vous n'avez pas de compte? <a href="#" onclick="toggleCards()">S'inscrire</a></p>
                 <p class="forgot-password"><a href="#">Mot de passe oublié?</a></p>
             </form>
+
         </div>
         
         <div class="auth-card" id="register-card" style="display: none;">
             <h2 class="auth-title">Inscription</h2>
-            <form class="auth-form" action="register_process.php" method="post">
+
+            <form class="auth-form" action="api/register.php" method="post">
+
+                <input type="hidden" name="action" value="register">
+
                 <div class="form-group">
                     <label for="fullname">Nom complet</label>
                     <input type="text" id="fullname" name="fullname" required>
                 </div>
                 <div class="form-group">
-                    <label for="reg-email">Email</label>
-                    <input type="email" id="reg-email" name="email" required>
+                    <label for="reg-email">Username</label>
+                    <input type="text" id="reg-email" name="username" required>
                 </div>
                 <div class="form-group">
                     <label for="reg-password">Mot de passe</label>
@@ -59,6 +69,7 @@
                 <button type="submit" class="auth-button">S'inscrire</button>
                 <p class="auth-link">Vous avez déjà un compte? <a href="#" onclick="toggleCards()">Se connecter</a></p>
             </form>
+
         </div>
     </div>
     
