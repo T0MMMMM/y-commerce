@@ -46,12 +46,9 @@
                         <h3 class="product-name"><?= $article["Name"] ?></h3>
                         <p class="product-price"><?= $article["Price"] ?> €</p>
                     </div>
-                    <form method="post" action="api/cart.php">
-                        <input type="hidden" name="path" value="/" ?>
-                        <?= '<input type="hidden" name="product_id" value="' . htmlspecialchars($article['Id']) . '">' ?>
-                        <button class="add-to-cart" value="add_to_cart" name="action" >Ajouter au panier</button>
-                    </form>
-                    
+
+                    <button class="add-to-cart" value="add_to_cart" name="action" onclick="updateCart(<?= htmlspecialchars($article['Id']) ?>, -1)">Ajouter au panier</button>
+
                 </div>
             </div>
 

@@ -1085,3 +1085,29 @@ body {
 .balance-form {
     margin-top: 20px;
 }
+
+/* Profile Form Styles */
+.profile-form {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.update-profile-btn {
+    background-color: #777;
+    color: white;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.update-profile-btn:hover {
+    background-color: #666;
+}

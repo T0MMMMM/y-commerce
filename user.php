@@ -2,30 +2,27 @@
 session_start();
 require_once 'api/crud.php';
 
-if (!isset($_SESSION['user'])) {
-    header("Location: login.php");
-    exit();
-}
-
-$user = getUserById($_SESSION['user']);
-
-if (isset($_POST['add_balance']) && is_numeric($_POST['amount'])) {
-    // Ajoutez ici la logique pour mettre à jour le solde
-    // Vous devrez créer une fonction updateUserBalance dans crud.php
-}
-
-if (isset($_POST['logout'])) {
-    session_destroy();
+// Vérifier si un ID est fourni dans l'URL
+if (!isset($_GET['id'])) {
     header("Location: index.php");
     exit();
 }
+
+$user = getUserById($_GET['id']);
+if (!$user) {
+    header("Location: index.php");
+    exit();
+}
+
+// Vérifier si c'est le profil de l'utilisateur connecté
+$isOwnProfile = isset($_SESSION['user']) && $_SESSION['user'] == $_GET['id'];
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Utilisateur - y-commerce</title>
+    <title>Profil de <?= htmlspecialchars($user['Username']) ?> - y-commerce</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -59,20 +56,33 @@ if (isset($_POST['logout'])) {
                 </div>
             </div>
 
-            <form class="balance-form" method="post">
-                <input type="number" name="amount" placeholder="Montant à ajouter" class="balance-input" min="1" step="0.01">
-                <div class="user-actions">
-                    <button type="submit" name="add_balance" class="user-action-btn add-balance-btn">
-                        Ajouter au solde
+            <?php if ($isOwnProfile): ?>
+                <form class="profile-form" onsubmit="event.preventDefault(); updateProfile(this.username.value)">
+                    <div class="form-group">
+                        <label for="username">Nom d'utilisateur</label>
+                        <input type="text" id="username" name="username" value="<?= htmlspecialchars($user['Username']) ?>" class="form-input">
+                    </div>
+                    <button type="submit" class="user-action-btn update-profile-btn">
+                        Mettre à jour le profil
                     </button>
-                    <button type="submit" name="logout" class="user-action-btn logout-btn">
-                        Déconnexion
-                    </button>
-                </div>
-            </form>
+                </form>
+
+                <form class="balance-form" onsubmit="event.preventDefault(); updateBalance(this.amount.value)">
+                    <input type="number" name="amount" placeholder="Montant à ajouter" class="balance-input" min="1" step="0.01">
+                    <div class="user-actions">
+                        <button type="submit" class="user-action-btn add-balance-btn">
+                            Ajouter au solde
+                        </button>
+                        <button type="button" onclick="logout()" class="user-action-btn logout-btn">
+                            Déconnexion
+                        </button>
+                    </div>
+                </form>
+            <?php endif; ?>
         </div>
     </div>
     
     <?php include 'includes/footer.php'; ?>
+    <script src="javascript/user_actions.js"></script>
 </body>
 </html>

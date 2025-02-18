@@ -22,11 +22,7 @@ require_once 'api/cart.php';
         </div>
         
         <div class="cart-content">
-            
-
                 <?php
-
-                    
 
                     $cart = getCart();
 

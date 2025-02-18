@@ -114,6 +114,15 @@ function getUserById($id) {
     return $user;
 }
 
+function updateUserProfile($userId, $username) {
+    global $conn;
+    $sql = "UPDATE user SET Username = ? WHERE Id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("si", $username, $userId);
+    $stmt->execute();
+    $stmt->close();
+}
+
 $jsonData = json_encode([
     "wishlist" => ["movies", "sports"]
 ]);

@@ -10,7 +10,7 @@
     </form>
     <div class="nav-icons">
         <?php if (isset($_SESSION['user'])): ?>
-            <a href="user.php" class="user-info">
+            <a href="user.php?id=<?= htmlspecialchars($_SESSION['user']) ?>" class="user-info">
                 <div class="user-avatar" >
                     <?php 
                         $user_session = getUserById($_SESSION["user"]);

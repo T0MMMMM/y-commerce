@@ -13,8 +13,7 @@ function addToCart(productId) {
     .then(response => response.text())
     .then(data => {
         console.log(data);
-        // Update the UI
-        alert('Produit ajouté au panier');
+        location.reload();
     })
     .catch(error => console.error('Error:', error));
 }
