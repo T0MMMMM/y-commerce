@@ -16,10 +16,7 @@
         <div class="auth-card" id="login-card">
             <h2 class="auth-title">Connexion</h2>
 
-            <form class="auth-form" action="api/register.php" method="post">
-
-                <input type="hidden" name="action" value="login">
-
+            <form class="auth-form" onsubmit="handleAuth(event, 'login')">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" required>
@@ -28,10 +25,6 @@
                     <label for="password">Mot de passe</label>
                     <input type="password" id="password" name="password" required>
                 </div>
-                <!-- <div class="form-group remember-me">
-                    <input type="checkbox" id="remember" name="remember">
-                    <label for="remember">Se souvenir de moi</label>
-                </div> -->
                 <button type="submit" class="auth-button">Se connecter</button>
                 <p class="auth-link">Vous n'avez pas de compte? <a href="#" onclick="toggleCards()">S'inscrire</a></p>
                 <p class="forgot-password"><a href="#">Mot de passe oublié?</a></p>
@@ -42,9 +35,7 @@
         <div class="auth-card" id="register-card" style="display: none;">
             <h2 class="auth-title">Inscription</h2>
 
-            <form class="auth-form" action="api/register.php" method="post">
-
-                <input type="hidden" name="action" value="register">
+            <form class="auth-form" onsubmit="handleAuth(event, 'register')">
 
                 <div class="form-group">
                     <label for="fullname">Nom complet</label>
@@ -90,5 +81,6 @@
             }
         }
     </script>
+    <script src="javascript/actions.js"></script>
 </body>
 </html>

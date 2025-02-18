@@ -23,11 +23,10 @@ function removeFromCart($product_id) {
     }
 }
 
-function updateCart($product_id, $quantity) {
+function updateCart($product_id, $quantity_change) {
     if (isset($_SESSION['cart'][$product_id])) {
-        if ($quantity > 0) {
-            $_SESSION['cart'][$product_id]['quantity'] = $quantity;
-        } else {
+        $_SESSION['cart'][$product_id]['quantity'] += $quantity_change;
+        if ($_SESSION['cart'][$product_id]['quantity'] <= 0) {
             removeFromCart($product_id);
         }
     } else {
@@ -41,26 +40,28 @@ function clearCart() {
 
 function getCart() {
     if (empty($_SESSION['cart'])) {
-            return "Votre panier est vide.";
+        return "Votre panier est vide.";
     }
     $cart = [];
     foreach ($_SESSION["cart"] as $key => $value) {
-            $cart[] = getArticleById($key);
+        $cart[] = getArticleById($key);
     }
     return $cart;
 }
 
-
 if (isset($_POST['action'])) {
+    $product_id = $_POST['product_id'] ?? null;
+    $quantity_change = $_POST['quantity_change'] ?? null;
+
     switch ($_POST['action']) {
         case 'add_to_cart':
-            addToCart($_POST['product_id']);
+            addToCart($product_id);
             break;
         case 'remove_from_cart':
-            removeFromCart($_POST['product_id']);
+            removeFromCart($product_id);
             break;
         case 'update_cart':
-            updateCart($_POST['product_id'], $_POST['quantity']);
+            updateCart($product_id, $quantity_change);
             break;
         case 'clear_cart':
             clearCart();
@@ -74,5 +75,4 @@ if (isset($_POST['action'])) {
         exit();
     }
 }
-
 ?>

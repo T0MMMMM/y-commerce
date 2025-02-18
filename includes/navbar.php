@@ -8,9 +8,17 @@
         </svg>
     </form>
     <div class="nav-icons">
-        <a href="login.php" class="nav-icon">
+        <a href="<?= isset($_SESSION['user']) ? 'user.php' : 'login.php' ?>" class="nav-icon">
             <i class="fas fa-user"></i>
         </a>
+        <?php 
+        require_once 'api/crud.php';
+
+        if (isset($_SESSION['user'])) {
+            $user_session = getUserById($_SESSION["user"]);
+            echo $user_session["Username"];
+        }
+        ?> 
         <a href="cart.php" class="nav-icon">
             <i class="fas fa-shopping-cart"></i>
             <span class="cart-badge"><?= count($_SESSION["cart"]) ?></span>

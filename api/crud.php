@@ -79,8 +79,6 @@ function getArticleById($id) {
     return $article;
 }
 
-
-
 function postUser($Username, $Password, $Role) {
     global $conn;
     $sql = "INSERT INTO user (Username, Password, Balance, Avatar, Role, Wishlist) VALUES (?, ?, ?, ?, ?, ?)";
@@ -90,7 +88,6 @@ function postUser($Username, $Password, $Role) {
     $Wishlist = json_encode(["wishlist" => []]);
     $stmt->bind_param("ssisss",$Username, $Password, $Balance, $Avatar, $Role, $Wishlist);
     if ($stmt->execute()) {
-        echo "good";
         return $conn->insert_id;
     } else {
         echo "failed to create user: " . $stmt->error;
@@ -98,6 +95,17 @@ function postUser($Username, $Password, $Role) {
     $stmt->close();
 }
 
+function getUserById($id) {
+    global $conn;
+    $sql = "SELECT * FROM user WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    $stmt->close();
+    return $user;
+}
 
 $jsonData = json_encode([
     "wishlist" => ["movies", "sports"]
@@ -106,6 +114,5 @@ $role = json_encode([
     "role" => ["user"]
 ]);
 //postArticle("Guitare", "instrument", "instrument de musique", 100);
-
 
 ?>

@@ -41,28 +41,15 @@
                         <h3 class="cart-item-name"><?= $article["Name"] ?></h3>
                         <p class="cart-item-price"><?= $article["Price"] ?> €</p>
                         <div class="cart-item-quantity">
-                            <form method="post" action="api/cart.php">
-                                <input type="hidden" name="path" value="/cart.php" ?>
-                                <?= '<input type="hidden" name="quantity" value="' . htmlspecialchars($_SESSION["cart"][$article["Id"]]["quantity"]-1) . '">' ?>
-                                <?= '<input type="hidden" name="product_id" value="' . htmlspecialchars($article['Id']) . '">' ?>
-                                <button class="quantity-btn minus" name="action" value="update_cart">-</button>
-                            </form>
-                            <?= '<input type="text" value="' . $_SESSION["cart"][$article["Id"]]["quantity"] . '" min="1" class="quantity-input" disabled>' ?>
-                            <form method="post" action="api/cart.php">
-                                <input type="hidden" name="path" value="/cart.php" ?>
-                                <?= '<input type="hidden" name="product_id" value="' . htmlspecialchars($article['Id']) . '">' ?>
-                                <button class="quantity-btn plus" name="action" value="add_to_cart">+</button>
-                            </form>
+                            <button class="quantity-btn minus" onclick="updateCart(<?= htmlspecialchars($article['Id']) ?>, -1)">-</button>
+                            <input type="text" value="<?= $_SESSION["cart"][$article["Id"]]["quantity"] ?>" min="1" class="quantity-input" disabled>
+                            <button class="quantity-btn plus" onclick="updateCart(<?= htmlspecialchars($article['Id']) ?>, 1)">+</button>
                         </div>
                     </div>
                     <div class="cart-item-subtotal">
                         <p><?= $article["Price"]*$_SESSION["cart"][$article["Id"]]["quantity"] ?> €</p>
                     </div>
-                    <form method="post" action="api/cart.php">
-                        <input type="hidden" name="path" value="/cart.php" ?>
-                        <?= '<input type="hidden" name="product_id" value="' . htmlspecialchars($article['Id']) . '">' ?>
-                        <button class="remove-item" name="action" value="remove_from_cart"><i class="fas fa-trash-alt"></i></button>
-                    </form>
+                    <button class="remove-item" onclick="removeFromCart(<?= htmlspecialchars($article['Id']) ?>)"><i class="fas fa-trash-alt"></i></button>
                     
                 </div>
 
@@ -115,6 +102,7 @@
     
     <!-- Font Awesome pour les icônes -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script src="javascript/actions.js"></script>
     
     <script>
         // Quantity buttons functionality

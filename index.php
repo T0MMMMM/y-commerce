@@ -40,7 +40,7 @@
             foreach ($articles as $article):
             ?>
             <!-- Product card -->
-            <div class="product-card">
+            <div class="product-card" onclick="window.location.href='article.php?id=<?= htmlspecialchars($article['Id']) ?>'">
                 <img src="images/test_image.jpg" alt="Produit 1" class="product-image">
                 <div class="product-info">
                     <div>

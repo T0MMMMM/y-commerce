@@ -6,10 +6,6 @@ if (!isset($_SESSION)) {
 require_once 'config.php';
 require_once 'crud.php';
 
-
-$test = json_encode(["role" => ["user"]]);
-
-
 function register($Username, $Password, $role) {
     global $key;
     if (empty($Username) || empty($Password)) {
@@ -33,7 +29,6 @@ function register($Username, $Password, $role) {
     }
 }
 
-
 function login($Username, $Password) {
     if (empty($Username) || empty($Password)) {
         echo "Username and Password are required";
@@ -48,9 +43,8 @@ function login($Username, $Password) {
         echo "Password is incorrect";
         return;
     }
-    $_SESSION["user"] = $user["id"];
+    $_SESSION["user"] = $user["Id"];
 }
-
 
 if (isset($_POST["action"]) && $_POST["action"] == "login") {
     if (isset($_POST["username"]) && $_POST["password"]) {
@@ -58,16 +52,12 @@ if (isset($_POST["action"]) && $_POST["action"] == "login") {
     }
 } if (isset($_POST["action"]) && $_POST["action"] == "register") {
     if (isset($_POST["username"]) && $_POST["password"]) {
-        register($_POST["username"], $_POST["password"], $test);
+        register($_POST["username"], $_POST["password"], role: json_encode(["role" => ["user"]]));
     }
 }
 
-// header("Location: http://localhost/y-commerce/");
-// exit();
 
 
-//register("Victor","michel", $test);
-//login("dylan", "saboteur97");
 
 
 
