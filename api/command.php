@@ -14,8 +14,28 @@ function command() {
         echo "Solde insuffisant";
         return;
     } else {
-        echo "c'est good";
+        createCommand($total);
+        removeMoney($total);
     }
+}
+
+function createCommand($total) {
+    $cart = getCart();
+    $array = createDetailsCommand($cart);
+    $userId = $_SESSION["user"];
+    var_dump($array);
+    $commandid = createOrder($userId,$total, $array);
+}
+
+function createDetailsCommand($articles): array {
+    $array = [];
+    foreach ($articles as $article):
+        $articleid = (int) $article["Id"];
+        $quantity = (int) $_SESSION["cart"][$article["Id"]]["quantity"];
+        echo $_SESSION["cart"][$article["Id"]]["quantity"];
+        array_push($array, createOrderDetails($articleid, $quantity));
+    endforeach;
+    return $array;
 }
 
 
@@ -26,7 +46,13 @@ function addMoney(int $amount) {
         echo "Montant invalide";
         return;
     }
-    echo"$newValue";
+    updateUserBalance($_SESSION["user"], $newValue);
+    var_dump($_SESSION["user"]);
+}
+
+function removeMoney(int $amount) {
+    $user = getUserById($_SESSION["user"]);
+    $newValue = (float) $user["Balance"] - (float) $amount;
     updateUserBalance($_SESSION["user"], $newValue);
     var_dump($_SESSION["user"]);
 }

@@ -117,6 +117,39 @@ function updateUserBalance(int $id, $value) {
     $stmt->close();
 }
 
+function createOrderDetails(int $ArticleId, int $Quantity): int {
+    global $conn;
+    $sql = "INSERT INTO order_details (Id_article, Article_number) VALUES (?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $ArticleId, $Quantity);
+    $stmt->execute();
+    $insertedId = $conn->insert_id; 
+    $stmt->close();
+    return $insertedId;
+}
+
+function createOrder(int $userId, int $totalAmount, array $articlesList): int {
+    global $conn;
+    $sql = "INSERT INTO orders (id_user, Transaction_date, Total_amount, Articles_list, Address, Place, CP) 
+        VALUES (?, NOW(), ?, ?, address, place, cp)";
+    $stmt = $conn->prepare($sql);
+    $out = array_values($articlesList);
+    $value = json_encode($out);
+    $stmt->bind_param("iis", $userId, $totalAmount, $value);
+
+    if (!$stmt->execute()) {
+        echo ("Erreur d'exécution SQL: " . $stmt->error);
+        $stmt->close();
+        return -1;
+    }
+    $insertedId = $conn->insert_id; 
+    $stmt->close();
+    return $insertedId;
+}
+
+
+    
+
 
 
 $jsonData = json_encode([
