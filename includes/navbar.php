@@ -26,7 +26,13 @@
         <?php endif; ?>
         <a href="cart.php" class="nav-icon">
             <i class="fas fa-shopping-cart"></i>
-            <span class="cart-badge"><?= count($_SESSION["cart"] ?? []) ?></span>
+            <?php
+            $count = 0;
+            foreach ($_SESSION["cart"] ?? [] as $key => $value) {
+                $count += $value["quantity"];
+            }
+            ?>
+            <span class="cart-badge"><?= $count ?></span>
         </a>
     </div>
 </nav>

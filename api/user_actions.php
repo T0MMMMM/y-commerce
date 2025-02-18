@@ -28,6 +28,19 @@ switch ($_POST['action']) {
         }
         break;
 
+    case 'update_password':
+        if (!isset($_POST['currentPassword']) || !isset($_POST['newPassword'])) {
+            echo json_encode(['error' => 'Données manquantes']);
+            exit();
+        }
+        
+        if (updateUserPassword($_SESSION['user'], $_POST['currentPassword'], $_POST['newPassword'])) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['error' => 'Mot de passe actuel incorrect']);
+        }
+        break;
+
     case 'logout':
         session_destroy();
         echo json_encode(['success' => true]);
