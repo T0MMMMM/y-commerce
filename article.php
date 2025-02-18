@@ -34,7 +34,7 @@ if ($article['Slug'] !== $_GET['slug'] || $article["Id"] !== (int) $_GET['id']) 
         <div class="article-info-container">
             <h1 class="single-article-title"><?= htmlspecialchars($article['Name']) ?></h1>
             <div class="article-metadata">
-                <span class="article-author">Par <?= htmlspecialchars($article['Author']) ?></span>
+                <span class="article-author">Par <a href="/y-commerce/user.php?id=<?= htmlspecialchars($article['AuthorId']) ?>"><?= htmlspecialchars($article['Author']) ?></a></span>
                 <span class="article-date">Publié le <?= date('d/m/Y', strtotime($article['Publication_date'])) ?></span>
                 <span class="article-slug">#<?= htmlspecialchars($article['Slug']) ?></span>
             </div>

@@ -18,7 +18,7 @@ require_once 'api/cart.php';
     <div class="cart-container">
         <div class="cart-header">
             <h1 class="cart-title">Votre Panier</h1>
-            <span class="cart-count">4 articles</span>
+            <span class="cart-count"><?= count($_SESSION["cart"] ?? []) ?> articles</span>
         </div>
         
         <div class="cart-content">
@@ -109,25 +109,5 @@ require_once 'api/cart.php';
     <!-- Font Awesome pour les icônes -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <script src="javascript/actions.js"></script>
-    
-    <script>
-        // Quantity buttons functionality
-        // document.querySelectorAll('.quantity-btn').forEach(button => {
-        //     button.addEventListener('click', function() {
-        //         const input = this.parentNode.querySelector('.quantity-input');
-        //         const currentValue = parseInt(input.value);
-                
-        //         if (this.classList.contains('plus')) {
-        //             input.value = currentValue + 1;
-        //         } else if (this.classList.contains('minus') && currentValue > 1) {
-        //             input.value = currentValue - 1;
-        //         }
-                
-        //         // Here you would update the subtotal and total
-        //         // This is a placeholder for actual implementation
-        //     });
-        // });
-        
-    </script>
 </body>
 </html>

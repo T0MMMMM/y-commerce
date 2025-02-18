@@ -90,7 +90,7 @@ function getUserByName($name) {
 
 function getArticleById($id) {
     global $conn;
-    $sql = "SELECT a.*, u.Username as Author 
+    $sql = "SELECT a.*, u.Username as Author, u.Id as AuthorId
             FROM article a 
             LEFT JOIN user u ON a.Id_owner = u.Id 
             WHERE a.id = ?";
@@ -180,10 +180,34 @@ function createOrder(int $userId, int $totalAmount, array $articlesList): int {
     return $insertedId;
 }
 
+function getUserArticles($userId) {
+    global $conn;
+    $sql = "SELECT a.*, u.Username as Author 
+            FROM article a 
+            JOIN user u ON a.Id_owner = u.Id 
+            WHERE a.Id_owner = ? 
+            ORDER BY a.Publication_Date DESC";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
 
+function updateUserPassword($userId, $currentPassword, $newPassword) {
+    global $conn;
+    $user = getUserById($userId);
     
-
-
+    if (!password_verify($currentPassword, $user['Password'])) {
+        return false;
+    }
+    
+    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+    $sql = "UPDATE user SET Password = ? WHERE Id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("si", $hashedPassword, $userId);
+    return $stmt->execute();
+}
 
 $jsonData = json_encode([
     "wishlist" => ["movies", "sports"]
