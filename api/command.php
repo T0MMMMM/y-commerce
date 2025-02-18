@@ -59,7 +59,7 @@ function removeMoney(int $amount) {
 
 
 command();
-
+var_dump(getCommandsByUserId($_SESSION["user"]));
 
 
 

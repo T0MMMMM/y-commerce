@@ -60,6 +60,23 @@ function getArticlesByName($name) {
     return $articles;
 }
 
+function getCommandsByUserId(int $userId): array {
+    global $conn;
+    $sql = "SELECT * FROM orders WHERE id_user = ?";  
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        error_log("Erreur de préparation SQL: " . $conn->error);
+        return [];
+    }
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $commands = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+    return $commands;
+}
+
+
 function getUserByName($name) {
     global $conn;
     $sql = "SELECT * FROM user WHERE Username = ?";
