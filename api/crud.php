@@ -107,6 +107,18 @@ function getUserById($id) {
     return $user;
 }
 
+
+function updateUserBalance(int $id, $value) {
+    global $conn;
+    $sql = "UPDATE user SET Balance = ? WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $value, $id);
+    $stmt->execute();
+    $stmt->close();
+}
+
+
+
 $jsonData = json_encode([
     "wishlist" => ["movies", "sports"]
 ]);
