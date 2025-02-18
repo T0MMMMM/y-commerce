@@ -49,4 +49,8 @@ if (isset($_POST["action"]) && $_POST["action"] == "create_command") {
     command();
 }
 
+$user = getUserById($_SESSION['user']);
+echo $user["Username"];
+
+
 ?>

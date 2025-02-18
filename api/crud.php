@@ -81,10 +81,11 @@ function getUserByName($name) {
     global $conn;
     $sql = "SELECT * FROM user WHERE Username = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $name); 
+    $stmt->bind_param("s", $name);
     $stmt->execute();
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
+    $stmt->close();
     return $user;
 }
 
@@ -105,7 +106,7 @@ function getArticleById($id) {
 
 function postUser($Username, $Password, $Role) {
     global $conn;
-    $sql = "INSERT INTO user (Username, Password, Balance, Avatar, Role, Wishlist) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO user (Username, Password, Balance, Avatar, Role, Wishlist, Creation_Date, Modification_Date) VALUES (?, ?, ?, ?, ?, ?, NOW(), null)";
     $stmt = $conn->prepare($sql);
     $Balance = 0;
     $Avatar = "";
@@ -136,6 +137,7 @@ function updateUserProfile($userId, $username) {
     $sql = "UPDATE user SET Username = ? WHERE Id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("si", $username, $userId);
+    updateUserModificationDate($userId);
     $stmt->execute();
     $stmt->close();
 }
@@ -146,6 +148,15 @@ function updateUserBalance(int $id, $value) {
     $sql = "UPDATE user SET Balance = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ii", $value, $id);
+    $stmt->execute();
+    $stmt->close();
+}
+
+function updateUserModificationDate(int $id) {
+    global $conn;
+    $sql = "UPDATE user SET Modification_Date = NOW() WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
     $stmt->execute();
     $stmt->close();
 }

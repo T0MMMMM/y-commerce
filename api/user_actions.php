@@ -21,9 +21,11 @@ switch ($_POST['action']) {
             echo json_encode(['error' => 'Invalid username']);
             exit();
         }
-        
-        updateUserProfile($_SESSION['user'], $_POST['username']);
-        echo json_encode(['success' => true, 'newUsername' => $_POST['username']]);
+        $user = getUserById($_SESSION['user']);
+        if (!getUserByName($_POST["username"]) > 0) {
+            updateUserProfile($_SESSION['user'], $_POST['username']);
+            echo json_encode(['success' => true, 'newUsername' => $_POST['username']]);
+        }
         break;
 
     case 'logout':
