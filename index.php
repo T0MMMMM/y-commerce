@@ -23,8 +23,6 @@
         <!-- Products section -->
         <div class="products">
             <?php
-
-            require_once 'api/crud.php';
             
             if (isset($_GET["search-bar"])) {
                 $articles = getArticlesByName($_GET["search-bar"]);

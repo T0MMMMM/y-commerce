@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php
+session_start();
+require_once 'api/cart.php';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -19,15 +22,22 @@
         </div>
         
         <div class="cart-content">
-            <div class="cart-items">
+            
 
                 <?php
 
-                    require_once 'api/cart.php';
+                    
 
                     $cart = getCart();
 
                     $total = 0;
+
+                    if (empty($cart)) {
+                        echo '<div class="cart-items" style="display: contents;">';
+                        echo '<p style="display: flex; justify-content: center; align-items: center;">Votre panier est vide.</p>';
+                    } else {
+
+                    echo '<div class="cart-items">';
 
                     foreach ($cart as $article):
                         $total += $article['Price']*$_SESSION["cart"][$article["Id"]]["quantity"];
@@ -53,7 +63,7 @@
                     
                 </div>
 
-                <?php endforeach; ?>
+                <?php endforeach; } ?>
 
             </div>
             <!-- Order summary -->

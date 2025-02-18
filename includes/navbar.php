@@ -1,3 +1,4 @@
+<?php require_once 'api/crud.php'; ?>
 <nav class="navbar" id="navbar">
     <a class="brand" href="/y-commerce">y-commerce.</a>
     <form action="/y-commerce" method="get" class="search-bar">
@@ -8,20 +9,24 @@
         </svg>
     </form>
     <div class="nav-icons">
-        <a href="<?= isset($_SESSION['user']) ? 'user.php' : 'login.php' ?>" class="nav-icon">
-            <i class="fas fa-user"></i>
-        </a>
-        <?php 
-        require_once 'api/crud.php';
-
-        if (isset($_SESSION['user'])) {
-            $user_session = getUserById($_SESSION["user"]);
-            echo $user_session["Username"];
-        }
-        ?> 
+        <?php if (isset($_SESSION['user'])): ?>
+            <a href="user.php" class="user-info">
+                <div class="user-avatar" >
+                    <?php 
+                        $user_session = getUserById($_SESSION["user"]);
+                        echo strtoupper(substr($user_session["Username"], 0, 1));
+                    ?>
+                </div>
+                <span class="user-name"><?= htmlspecialchars($user_session["Username"]) ?></span>
+            </a>
+        <?php else: ?>
+            <a href="login.php" class="nav-icon">
+                <i class="fas fa-user"></i>
+            </a>
+        <?php endif; ?>
         <a href="cart.php" class="nav-icon">
             <i class="fas fa-shopping-cart"></i>
-            <span class="cart-badge"><?= count($_SESSION["cart"]) ?></span>
+            <span class="cart-badge"><?= count($_SESSION["cart"] ?? []) ?></span>
         </a>
     </div>
 </nav>

@@ -40,7 +40,7 @@ function clearCart() {
 
 function getCart() {
     if (empty($_SESSION['cart'])) {
-        return "Votre panier est vide.";
+        return [];
     }
     $cart = [];
     foreach ($_SESSION["cart"] as $key => $value) {
