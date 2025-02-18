@@ -1,50 +1,29 @@
 <?php
 session_start();
 require_once 'crud.php';
-
-header('Content-Type: application/json');
-
-// Vérifier si la requête est en POST
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['error' => 'Method not allowed']);
-    exit();
-}
-
-// Récupérer les données envoyées
-$data = json_decode(file_get_contents('php://input'), true);
-
-// Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION['user'])) {
-    http_response_code(401);
-    echo json_encode(['error' => 'Unauthorized']);
-    exit();
-}
+require_once 'command.php';
 
 // Traiter les différentes actions
-switch ($data['action']) {
+switch ($_POST['action']) {
     case 'update_balance':
-        if (!isset($data['amount']) || !is_numeric($data['amount'])) {
+        if (!isset($_POST['amount']) || !is_numeric($_POST['amount'])) {
             http_response_code(400);
             echo json_encode(['error' => 'Invalid amount']);
             exit();
         }
-        
-        $user = getUserById($_SESSION['user']);
-        $newBalance = $user['Balance'] + $data['amount'];
-        updateUserBalance($user['Id'], $newBalance);
-        echo json_encode(['success' => true, 'newBalance' => $newBalance]);
+        updateBalance($_POST['amount']);
+        echo "dddd";
         break;
 
     case 'update_profile':
-        if (!isset($data['username']) || empty(trim($data['username']))) {
+        if (!isset($_POST['username']) || empty(trim($_POST['username']))) {
             http_response_code(400);
             echo json_encode(['error' => 'Invalid username']);
             exit();
         }
         
-        updateUserProfile($_SESSION['user'], $data['username']);
-        echo json_encode(['success' => true, 'newUsername' => $data['username']]);
+        updateUserProfile($_SESSION['user'], $_POST['username']);
+        echo json_encode(['success' => true, 'newUsername' => $_POST['username']]);
         break;
 
     case 'logout':

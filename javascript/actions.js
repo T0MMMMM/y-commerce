@@ -79,3 +79,22 @@ function removeFromCart(productId) {
     })
     .catch(error => console.error('Error:', error));
 }
+
+function createCommand() {
+    fetch('api/command.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        credentials: 'include', // Include cookies in the request
+        body: new URLSearchParams({
+            'action': "create_command"
+        })
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+        location.reload();
+    })
+    .catch(error => console.error('Error:', error));
+}

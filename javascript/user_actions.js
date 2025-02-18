@@ -1,73 +1,59 @@
-async function updateBalance(amount) {
-    try {
-        const response = await fetch('/y-commerce/api/user_actions.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                action: 'update_balance',
-                amount: parseFloat(amount)
-            })
-        });
-
-        const data = await response.json();
-        if (data.success) {
-            document.querySelector('.stat-value').textContent = `${data.newBalance} €`;
-            return true;
-        }
-        throw new Error(data.error);
-    } catch (error) {
-        console.error('Error:', error);
-        return false;
-    }
+function updateBalance(amount) {
+    fetch('api/user_actions.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        credentials: 'include', // Include cookies in the request
+        body: new URLSearchParams({
+            'amount': parseFloat(amount),
+            'action': 'update_balance'
+        })
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+        location.reload();
+    })
+    .catch(error => console.error('Error:', error));
 }
 
-async function updateProfile(username) {
-    try {
-        const response = await fetch('/y-commerce/api/user_actions.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                action: 'update_profile',
-                username: username
-            })
-        });
-
-        const data = await response.json();
-        if (data.success) {
-            document.querySelector('.user-info-header h1').textContent = data.newUsername;
-            return true;
-        }
-        throw new Error(data.error);
-    } catch (error) {
-        console.error('Error:', error);
-        return false;
-    }
+function updateProfile(username) {
+    fetch('api/user_actions.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        credentials: 'include', // Include cookies in the request
+        body: new URLSearchParams({
+            'username': username,
+            'action': 'update_profile'
+        })
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+        location.reload();
+    })
+    .catch(error => console.error('Error:', error));
 }
 
-async function logout() {
-    try {
-        const response = await fetch('/y-commerce/api/user_actions.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                action: 'logout'
-            })
-        });
-
-        const data = await response.json();
-        if (data.success) {
-            window.location.href = '/y-commerce/index.php';
-            return true;
-        }
-        throw new Error(data.error);
-    } catch (error) {
-        console.error('Error:', error);
-        return false;
-    }
+function logout() {
+    fetch('api/user_actions.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        credentials: 'include', // Include cookies in the request
+        body: new URLSearchParams({
+            'action': 'logout'
+        })
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+        window.location.href = 'index.php';
+    })
+    .catch(error => console.error('Error:', error));
 }
+

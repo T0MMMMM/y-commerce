@@ -67,17 +67,17 @@ $isOwnProfile = isset($_SESSION['user']) && $_SESSION['user'] == $_GET['id'];
                     </button>
                 </form>
 
-                <form class="balance-form" onsubmit="event.preventDefault(); updateBalance(this.amount.value)">
-                    <input type="number" name="amount" placeholder="Montant à ajouter" class="balance-input" min="1" step="0.01">
+                <div>
+                    <input type="number" id="amount" name="amount" placeholder="Montant à ajouter" class="balance-input" min="1" step="0.01">
                     <div class="user-actions">
-                        <button type="submit" class="user-action-btn add-balance-btn">
+                        <button type="submit" class="user-action-btn add-balance-btn" onclick=" updateBalance(document.getElementById('amount').value)">
                             Ajouter au solde
                         </button>
                         <button type="button" onclick="logout()" class="user-action-btn logout-btn">
                             Déconnexion
                         </button>
                     </div>
-                </form>
+                </div>
             <?php endif; ?>
         </div>
     </div>

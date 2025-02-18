@@ -86,7 +86,7 @@ require_once 'api/cart.php';
                     <button class="apply-code">Appliquer</button>
                 </div>
                 
-                <button class="checkout-btn">Passer votre commande</button>
+                <button class="checkout-btn"  onclick="createCommand()">Passez votre commande </button>
                 
                 <!-- <div class="secure-payment">
                     <i class="fas fa-lock"></i>
