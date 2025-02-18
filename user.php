@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once 'includes/auth_check.php';
 require_once 'api/crud.php';
 
 // Vérifier si un ID est fourni dans l'URL
