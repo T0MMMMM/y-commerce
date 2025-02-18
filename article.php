@@ -1,14 +1,20 @@
 <?php
 session_start();
+require_once 'api/crud.php';
+require_once 'utils/utils.php';
 
-if (!isset($_GET['id'])) {
+if (!isset($_GET['id']) || !isset($_GET['slug'])) {
     header("Location: index.php");
     exit();
 }
 
-require_once "api/crud.php";
-
 $article = getArticleById($_GET['id']);
+
+// Vérification si le slug dans l'URL correspond au slug de l'article
+if ($article['Slug'] !== $_GET['slug'] || $article["Id"] !== (int) $_GET['id']) {
+    header("Location: index.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -27,10 +33,13 @@ $article = getArticleById($_GET['id']);
         </div>
         <div class="article-info-container">
             <h1 class="single-article-title"><?= htmlspecialchars($article['Name']) ?></h1>
-            <div class="single-article-price"><?= htmlspecialchars($article['Price']) ?> €</div>
-            <div class="single-article-description">
-                <?= htmlspecialchars($article['Description']) ?>
+            <div class="article-metadata">
+                <span class="article-author">Par <?= htmlspecialchars($article['Author']) ?></span>
+                <span class="article-date">Publié le <?= date('d/m/Y', strtotime($article['Publication_date'])) ?></span>
+                <span class="article-slug">#<?= htmlspecialchars($article['Slug']) ?></span>
             </div>
+            <div class="single-article-price"><?= htmlspecialchars($article['Price']) ?> €</div>
+            <div class="single-article-description"><?= htmlspecialchars($article['Description']) ?></div>
             <div class="single-article-actions">
                 <button class="add-to-cart-btn" onclick="addToCart(<?= htmlspecialchars($article['Id']) ?>)">
                     Ajouter au panier

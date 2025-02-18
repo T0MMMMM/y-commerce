@@ -67,9 +67,9 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 5px 15px;
+    padding: 4px 15px;
     background-color: #f5f5f5;
-    border-radius: 20px;
+    border-radius: 15px;
     transition: all 0.3s ease;
 }
 
@@ -915,6 +915,54 @@ body {
 
     .single-article-actions {
         flex-direction: column;
+    }
+}
+
+/* Article metadata styles */
+.article-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.article-author {
+    color: #777;
+    font-weight: 500;
+}
+
+.article-date {
+    color: #999;
+}
+
+.article-slug {
+    background-color: #f5f5f5;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #666;
+}
+
+/* Update existing styles */
+.single-article-container {
+    margin: 120px auto 40px;
+    padding: 0 5%;
+    max-width: 1400px;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 50px;
+}
+
+@media (max-width: 768px) {
+    .single-article-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .article-metadata {
+        flex-direction: column;
+        gap: 8px;
     }
 }
 

@@ -73,9 +73,16 @@ function getUserByName($name) {
 
 function getArticleById($id) {
     global $conn;
-    $sql = "SELECT * FROM article WHERE id = $id";
-    $result = $conn ->query($sql);
+    $sql = "SELECT a.*, u.Username as Author 
+            FROM article a 
+            LEFT JOIN user u ON a.Id_owner = u.Id 
+            WHERE a.id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
     $article = $result->fetch_assoc();
+    $stmt->close();
     return $article;
 }
 

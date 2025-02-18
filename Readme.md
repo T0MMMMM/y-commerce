@@ -9,7 +9,7 @@ Ce projet consiste à créer un site e-commerce complet en utilisant PHP. Voici 
 - [x] La page de `login` qui connecte l'utilisateur et le redirige sur la page Accueil.
 - [x] Les utilisateurs doivent être uniques.
 - [x] Les articles de la page Accueil sont triés par date décroissante.
-- [ ] La page de détail comprend le nom de l'auteur, le nom de l'article, le slug, la date, l'image et la description.
+- [x] La page de détail comprend le nom de l'auteur, le nom de l'article, le slug, la date, l'image et la description.
 - [x] La page Product est accessible en méthode GET avec paramètres.
 - [x] L'utilisateur peut ajouter un article dans son panier.
 - [ ] La page Panier comporte tous les articles dans le panier, la possibilité de passer commande en fonction du solde de l'utilisateur, gérer le nombre d'articles et le CRUD.

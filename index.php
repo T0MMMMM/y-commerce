@@ -1,5 +1,6 @@
 <?php 
     session_start();
+    require_once "utils/utils.php";
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = [];
     }
@@ -38,7 +39,7 @@
             foreach ($articles as $article):
             ?>
             <!-- Product card -->
-            <div class="product-card" onclick="window.location.href='article.php?id=<?= htmlspecialchars($article['Id']) ?>'">
+            <div class="product-card" onclick="window.location.href='article.php?id=<?= htmlspecialchars($article['Id']) ?>&slug=<?= htmlspecialchars($article['Slug']) ?>'">
                 <img src="images/test_image.jpg" alt="Produit 1" class="product-image">
                 <div class="product-info">
                     <div>
