@@ -47,43 +47,17 @@ $user = getUserById($_SESSION['user']);
                 </div>
             </div>
 
-            <form class="profile-form" onsubmit="event.preventDefault(); updateProfile(this.username.value)">
-                <div class="form-group">
-                    <label for="username">Nom d'utilisateur</label>
-                    <input type="text" id="username" name="username" value="<?= htmlspecialchars($user['username']) ?>" class="form-input">
-                </div>
+            <form action="edit_profile.php" method="post" class="profile-actions">
+                <input type="hidden" name="id" value="<?= $user['id'] ?>">
                 <button type="submit" class="user-action-btn update-profile-btn">
-                    Mettre à jour le profil
+                    Modifier le profil
                 </button>
             </form>
 
-            <div class="password-section">
-                <h2>Changer le mot de passe</h2>
-                <form class="password-form" onsubmit="event.preventDefault(); updatePassword(this.currentPassword.value, this.newPassword.value)">
-                    <div class="form-group">
-                        <label for="currentPassword">Mot de passe actuel</label>
-                        <input type="password" id="currentPassword" name="currentPassword" required class="form-input">
-                    </div>
-                    <div class="form-group">
-                        <label for="newPassword">Nouveau mot de passe</label>
-                        <input type="password" id="newPassword" name="newPassword" required class="form-input">
-                    </div>
-                    <button type="submit" class="user-action-btn update-password-btn">
-                        Modifier le mot de passe
-                    </button>
-                </form>
-            </div>
-
             <div class="balance-section">
-                <input type="number" id="amount" name="amount" placeholder="Montant à ajouter" class="balance-input" min="1" step="0.01">
-                <div class="user-actions">
-                    <button type="submit" class="user-action-btn add-balance-btn" onclick="updateBalance(document.getElementById('amount').value)">
-                        Ajouter au solde
-                    </button>
-                    <button type="button" onclick="logout()" class="user-action-btn logout-btn">
-                        Déconnexion
-                    </button>
-                </div>
+                <button type="button" onclick="logout()" class="user-action-btn logout-btn">
+                    Déconnexion
+                </button>
             </div>
         </div>
 

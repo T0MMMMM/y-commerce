@@ -4,6 +4,7 @@ require_once "crudArticles.php";
 require_once "crudCommands.php";
 require_once "crudUser.php";
 require_once '../utils/utils.php';
+require_once "admin.php";
 
 if (!isset($_SESSION['user'])) {
     http_response_code(401);
@@ -19,7 +20,7 @@ switch ($_POST['action']) {
             'description' => $_POST['description'],
             'price' => floatval($_POST['price']),
             'image_link' => $_POST['image_link'],
-            'id_owner' => $_SESSION['user']
+            'owner_id' => $_SESSION['user']
         ];
 
         $result = createArticle($articleData);
@@ -36,7 +37,7 @@ switch ($_POST['action']) {
 
     case 'update':
         $article = getArticleById($_POST['id']);
-        if (!$article || $article['Id_owner'] !== $_SESSION['user']) {
+        if (!$article || $article['owner_id'] !== $_SESSION['user'] && !isAdmin()) {
             echo json_encode(['error' => 'Non autorisé']);
             exit();
         }

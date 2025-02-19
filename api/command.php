@@ -5,6 +5,7 @@ require_once 'cart.php';
 function command() {
     $total = 0;
     $cart = getCart();
+    echo'rwvgubjn';
     foreach ($cart as $article):
         $total += $article["price"]*$_SESSION["cart"][$article["id"]]["quantity"];
     endforeach;
@@ -14,7 +15,7 @@ function command() {
         return;
     } else {
         createCommand($total);
-        updateBalance(-$total);
+        updateBalance($_SESSION["user"], -$total);
         clearCart();
     }
 }
@@ -22,8 +23,8 @@ function command() {
 function createCommand($total) {
     $cart = getCart();
     $array = createDetailsCommand($cart);
-    $userId = $_SESSION["user"];
     var_dump($array);
+    $userId = $_SESSION["user"];
     $commandid = createOrder($userId,$total, $array);
 }
 
@@ -38,17 +39,15 @@ function createDetailsCommand($articles): array {
     return $array;
 }
 
-function updateBalance(int $amount) {
-    $user = getUserById($_SESSION["user"]);
+function updateBalance($id, int $amount) {
+    $user = getUserById($id);
     $newValue = (float) $user["balance"] + (float) $amount;
-    updateUserBalance($_SESSION["user"], $newValue);
+    updateUserBalance($id, $newValue);
 }
 
 if (isset($_POST["action"]) && $_POST["action"] == "create_command") {
     command();
 }
-
-$user = getUserById($_SESSION['user']);
 
 
 ?>

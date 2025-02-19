@@ -1,4 +1,4 @@
-function updateBalance(amount) {
+function updateBalance(id, amount) {
     if (amount <= 0) {
         alert("Erreur : " + "Veuillez rentrer un montant positif");
         return;
@@ -11,7 +11,8 @@ function updateBalance(amount) {
         credentials: 'include', // Include cookies in the request
         body: new URLSearchParams({
             'amount': parseFloat(amount),
-            'action': 'update_balance'
+            'action': 'update_balance',
+            'id' : id
         })
     })
     .then(response => response.json())
@@ -19,13 +20,13 @@ function updateBalance(amount) {
         if (!data.success) {
             alert("Erreur : " + data.error);
         } else {
-            window.location.href = 'index.php';
+            window.location.href = 'profile.php';
         };
     })
     .catch(error => console.error('Error:', error));
 }
 
-function updateProfile(username) {
+function updateProfile(id, username) {
     fetch('api/user_actions.php', {
         method: 'POST',
         headers: {
@@ -34,7 +35,8 @@ function updateProfile(username) {
         credentials: 'include', // Include cookies in the request
         body: new URLSearchParams({
             'username': username,
-            'action': 'update_profile'
+            'action': 'update_profile',
+            'id' : id
         })
     })
     .then(response => response.json())
@@ -42,7 +44,7 @@ function updateProfile(username) {
         if (!data.success) {
             alert("Erreur : " + data.error);
         } else {
-            window.location.href = 'index.php';
+            window.location.href = 'profile.php';
         }
     })
     .catch(error => console.error('Error:', error));
@@ -67,7 +69,7 @@ function logout() {
     .catch(error => console.error('Error:', error));
 }
 
-function updatePassword(currentPassword, newPassword) {
+function updatePassword(id, currentPassword, newPassword) {
     fetch('api/user_actions.php', {
         method: 'POST',
         headers: {
@@ -77,7 +79,8 @@ function updatePassword(currentPassword, newPassword) {
         body: new URLSearchParams({
             'action': 'update_password',
             'currentPassword': currentPassword,
-            'newPassword': newPassword
+            'newPassword': newPassword,
+            'id' : id
         })
     })
     .then(response => response.json())
@@ -86,7 +89,7 @@ function updatePassword(currentPassword, newPassword) {
         if (!data.success) {
             alert("Erreur : " + data.error);
         } else {
-            //location.reload();
+            window.location.href = 'profile.php';
         }
     })
     .catch(error => {

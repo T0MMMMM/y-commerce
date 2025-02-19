@@ -83,7 +83,7 @@ function postUser($Username, $Password, $Role) {
 
 function updateUserProfile($userId, $username) {
     global $conn;
-    $sql = "UPDATE user SET username = ? WHERE Id = ?";
+    $sql = "UPDATE user SET username = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("si", $username, $userId);
     updateUserModificationDate($userId);
@@ -121,6 +121,16 @@ function updateUserPassword($userId, $currentPassword, $newPassword) {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("si", $hashedPassword, $userId);
     return $stmt->execute();
+}
+
+function deleteUser($userId) {
+    global $conn;
+    $sql = "DELETE FROM user WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $userId);
+    $result = $stmt->execute();
+    $stmt->close();
+    return $result;
 }
 
 $jsonData = json_encode([

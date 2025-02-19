@@ -101,7 +101,7 @@ function createCommand() {
     .then(response => response.text())
     .then(data => {
         console.log(data);
-        location.reload();
+        //location.reload();
     })
     .catch(error => console.error('Error:', error));
 }

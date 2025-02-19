@@ -14,7 +14,7 @@ if (!isset($_GET['id']) || !isset($_GET['slug'])) {
 $article = getArticleById($_GET['id']);
 
 // Vérification si le slug dans l'URL correspond au slug de l'article
-if ($article['slug'] !== $_GET['slug'] || $article["Id"] !== (int) $_GET['id']) {
+if ($article['slug'] !== $_GET['slug'] || $article["id"] !== (int) $_GET['id']) {
     header("Location: index.php");
     exit();
 }
@@ -24,7 +24,7 @@ if ($article['slug'] !== $_GET['slug'] || $article["Id"] !== (int) $_GET['id']) 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($article['name']) ?> - y-commerce</title>
+    <title>Article - y-commerce</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -64,10 +64,11 @@ if ($article['slug'] !== $_GET['slug'] || $article["Id"] !== (int) $_GET['id']) 
                             style="<?= !isset($_SESSION['user']) || $_SESSION['user'] !== $article['owner_id'] ? 'width: 100%;' : '' ?>">
                         <i class="fas fa-heart"></i> Ajouter aux favoris
                     </button>
-                    <?php if (isset($_SESSION['user']) && $_SESSION['user'] === $article['Id_owner']): ?>
-                        <a href="edit_article.php?id=<?= $article['id'] ?>" class="edit-article-btn">
+                    <?php if (isset($_SESSION['user']) && ($_SESSION['user'] === $article['owner_id'] || isAdmin())): ?>
+                        <form action="edit_article.php" method="post" class="edit-article-btn" onclick="this.submit()">
+                            <input type="hidden" name="id" value="<?= $article['id'] ?>">
                             <i class="fas fa-edit"></i> Modifier
-                        </a>
+                        </form>
                     <?php endif; ?>
                 </div>
             </div>

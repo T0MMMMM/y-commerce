@@ -32,12 +32,14 @@ function createOrderDetails(int $ArticleId, int $Quantity): int {
 
 function createOrder(int $userId, int $totalAmount, array $articlesList): int {
     global $conn;
-    $sql = "INSERT INTO order (user_id, transaction_date, total_price, article_list, adress) 
-        VALUES (?, NOW(), ?, ?, Montpellier)";
+    $sql = "INSERT INTO `order` (user_id, transaction_date, total_price, article_list, adress) 
+        VALUES (?, NOW(), ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $out = array_values($articlesList);
-    $value = json_encode($out);
-    $stmt->bind_param("iis", $userId, $totalAmount, $value);
+    $value = json_encode($articlesList);
+    $city = "Montpellier";
+    var_dump($city);
+    $stmt->bind_param( "iiss", $userId, $totalAmount,  $value, $city);
+    
 
     if (!$stmt->execute()) {
         echo ("Erreur d'exécution SQL: " . $stmt->error);

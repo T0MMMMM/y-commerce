@@ -6,16 +6,16 @@ require_once "api/crudCommands.php";
 require_once "api/crudUser.php";
 require_once "api/command.php";
 require_once 'utils/utils.php';
+require_once "api/admin.php";
 
-if (!isset($_GET['id'])) {
+if (!isset($_POST['id'])) {
     header('Location: index.php');
     exit();
 }
 
-$article = getArticleById($_GET['id']);
+$article = getArticleById($_POST['id']);
 
-// Vérifier si l'utilisateur est le propriétaire de l'article
-if (!$article || $article['Id_owner'] !== $_SESSION['user']) {
+if (!$article || $article['owner_id'] !== $_SESSION['user'] && !isAdmin()) {
     header('Location: index.php');
     exit();
 }

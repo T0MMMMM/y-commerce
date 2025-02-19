@@ -57,7 +57,7 @@ function createArticle($data) {
         $data['description'],
         $data['price'],
         $data['image_link'],
-        $data['id_owner']
+        $data['owner_id']
     );
     
     if ($stmt->execute()) {
@@ -74,7 +74,7 @@ function getUserArticles($userId) {
     global $conn;
     $sql = "SELECT a.*, u.username as Author 
             FROM article a 
-            JOIN user u ON a.owner_id = u.Id 
+            JOIN user u ON a.owner_id = u.id 
             WHERE a.owner_id = ? 
             ORDER BY a.publication_date DESC";
     $stmt = $conn->prepare($sql);
@@ -109,5 +109,24 @@ function updateArticle($data) {
     return $result;
 }
 
+function deleteArticle($articleId) {
+    global $conn;
+    $sql = "DELETE FROM article WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $articleId);
+    $result = $stmt->execute();
+    $stmt->close();
+    return $result;
+}
+
+function deleteUserArticles($userId) {
+    global $conn;
+    $sql = "DELETE FROM article WHERE owner_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $userId);
+    $result = $stmt->execute();
+    $stmt->close();
+    return $result;
+}
 
 ?>
