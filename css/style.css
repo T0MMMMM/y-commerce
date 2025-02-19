@@ -219,7 +219,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 30px;
+    gap: 15px; /* Réduit l'espace pour compenser la hauteur fixe */
+    height: 135px; /* Hauteur fixe pour la zone d'info */
 }
 
 .product-name {
@@ -244,6 +245,11 @@ body {
     cursor: pointer;
     width: 100%;
     transition: background-color 0.3s;
+    height: 42px; /* Ajout d'une hauteur fixe */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 .add-to-cart:hover {
@@ -327,15 +333,6 @@ body {
     width: fit-content;
 }
 
-.quantity-btn {
-    background: none;
-    border: none;
-    color: #777;
-    font-size: 14px;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-}
 
 .quantity-input {
     width: 40px;
@@ -506,6 +503,56 @@ body {
     }
 }
 
+/* Quantity Controls Styles */
+.cart-controls {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    overflow: hidden;
+    padding: 4px;
+    height: 42px; /* Même hauteur que le bouton add-to-cart */
+}
+
+.quantity-btn {
+    flex: 1;
+    background-color: #777;
+    color: #f5f5f5;
+    border: none;
+    padding: 8px 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 33.33%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    height: 95%;
+}
+
+.quantity-btn-card {
+    height: 30px;
+}
+
+.quantity-btn:hover {
+    background-color: #6b6b6b;
+}
+
+.quantity-btn i {
+    font-size: 12px;
+}
+
+.quantity {
+    flex: 1;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px 0;
+    background-color: transparent;
+    width: 33.33%;
+    color: #555;
+}
 
 /* Footer Styles */
 .footer {
@@ -821,6 +868,9 @@ body {
     max-width: 1400px;
     margin: 120px auto 40px;
     padding: 0 5%;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 50px;
 }
 
 .article-image-container {
@@ -840,7 +890,42 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 15px;
+}
+
+.article-info-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.article-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
+    align-items: center;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+.article-author a {
+    color: #555555;
+    font-weight: 500;
+}
+
+.article-date {
+    color: #999;
+}
+
+.article-slug {
+    background-color: #f5f5f5;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #666;
 }
 
 .single-article-title {
@@ -859,21 +944,32 @@ body {
     font-size: 16px;
     line-height: 1.6;
     color: #555;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
 }
 
 .single-article-actions {
     display: flex;
     gap: 15px;
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto;
 }
 
-.add-to-cart-btn, .add-to-wishlist-btn {
+.add-to-cart-btn, .add-to-wishlist-btn, .edit-article-btn {
     padding: 15px 30px;
     border: none;
     border-radius: 6px;
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .add-to-cart-btn {
@@ -889,16 +985,38 @@ body {
     background-color: white;
     color: #777;
     border: 2px solid #777;
+    flex: 1;
+    height: 42px;
 }
 
 .add-to-wishlist-btn:hover {
     background-color: #f5f5f5;
 }
 
+.edit-article-btn {
+    background-color: #f0f0f0;
+    color: #444;
+    border: 2px solid #ddd;
+    text-decoration: none;
+    flex: 1;
+    height: 42px;
+}
+
+.edit-article-btn:hover {
+    background-color: #e5e5e5;
+}
+
+.secondary-actions {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
 @media (max-width: 768px) {
     .single-article-container {
         flex-direction: column;
         gap: 30px;
+        grid-template-columns: 1fr;
     }
 
     .article-image-container {
@@ -927,6 +1045,8 @@ body {
     font-size: 14px;
     margin-bottom: 20px;
     align-items: center;
+    margin-top: -10px;
+    margin-bottom: 10px;
 }
 
 .article-author a {
@@ -986,7 +1106,6 @@ body {
     gap: 20px;
     margin-bottom: 30px;
     padding-bottom: 20px;
-    border-bottom: 1px solid #eee;
 }
 
 .user-avatar {
@@ -1161,4 +1280,88 @@ body {
     margin-top: 30px;
     padding-top: 20px;
     border-top: 1px solid #eee;
+}
+
+/* Create Article Styles */
+.create-article-container {
+    max-width: 800px;
+    margin: 120px auto 40px;
+    padding: 0 20px;
+}
+
+.create-article-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+.create-article-card h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.create-article-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.create-article-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.create-article-btn {
+    background-color: #777;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.create-article-btn:hover {
+    background-color: #666;
+}
+
+.create-icon {
+    font-size: 20px;
+    margin-right: 10px;
+    width: 35px;
+    height: 35px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+}
+
+.create-icon:hover {
+    background-color: #333;
+    color: white;
+}
+
+.edit-article-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: #777;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.edit-article-btn:hover {
+    background-color: #666;
 }

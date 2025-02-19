@@ -61,7 +61,7 @@ function login($Username, $Password) {
     $user = getUserByName($Username);
     if (empty($user)) {
         $response['success'] = false;
-        $response['error'] = "Username already in use";
+        $response['error'] = "Username is incorrect";
         echo json_encode($response); 
         return;       
     }

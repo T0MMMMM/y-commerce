@@ -1,10 +1,10 @@
 <?php
 session_start();
+require_once 'includes/auth_check.php';
 require_once "api/crudArticles.php";
 require_once "api/crudCommands.php";
 require_once "api/crudUser.php";
-require_once "api/cart.php";
-
+require_once 'api/cart.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">

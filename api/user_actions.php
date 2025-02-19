@@ -14,7 +14,6 @@ switch ($_POST['action']) {
             exit();
         }
         updateBalance($_POST['amount']);
-        echo "dddd";
         break;
 
     case 'update_profile':
