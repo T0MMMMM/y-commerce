@@ -17,12 +17,12 @@ Ce projet consiste à créer un site e-commerce complet en utilisant PHP. Voici 
 - [x] L'utilisateur peut voir les articles qu'il a mis en vente et les informations de son compte.
 - [x] Le CRUD sur les articles est complet et fonctionnel.
 - [x] Possibilité d'ajouter de l'argent à son solde.
-- [ ] Si l'utilisateur n'est pas connecté, toutes les pages le redirigent vers la page de login, à l'exception de la page Accueil et Product.
+- [x] Si l'utilisateur n'est pas connecté, toutes les pages le redirigent vers la page de login, à l'exception de la page Accueil et Product.
 - [x] Le projet comprend toutes les entités obligatoires.
 - [x] Les mots de passe des utilisateurs sont chiffrés.
 - [x] L’utilisateur peut modifier ses informations personnelles.
-- [ ] Le site comprend au moins 1 administrateur.
-- [ ] Bonne gestion des rôles.
+- [x] Le site comprend au moins 1 administrateur.
+- [x] Bonne gestion des rôles.
 - [ ] L’administrateur possède un panel admin qui lui permet de modifier tous les utilisateurs et tous les articles.
 
 ## Installation
