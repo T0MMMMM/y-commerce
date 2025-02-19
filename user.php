@@ -3,20 +3,17 @@ session_start();
 require_once 'includes/auth_check.php';
 require_once 'api/crud.php';
 
-// Vérifier si un ID est fourni dans l'URL
-if (!isset($_GET['id'])) {
+if (!isset($_GET['u'])) {
     header("Location: index.php");
     exit();
 }
 
-$user = getUserById($_GET['id']);
+$user = getUserByName($_GET['u']);
 if (!$user) {
     header("Location: index.php");
     exit();
 }
 
-// Vérifier si c'est le profil de l'utilisateur connecté
-$isOwnProfile = isset($_SESSION['user']) && $_SESSION['user'] == $_GET['id'];
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -41,62 +38,6 @@ $isOwnProfile = isset($_SESSION['user']) && $_SESSION['user'] == $_GET['id'];
                 </div>
             </div>
 
-            <div class="user-stats">
-                <div class="stat-card">
-                    <div class="stat-value"><?= htmlspecialchars($user['Balance']) ?> €</div>
-                    <div class="stat-label">Solde disponible</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">
-                        <?php 
-                            $wishlist = json_decode($user['Wishlist'], true);
-                            echo count($wishlist['wishlist'] ?? []);
-                        ?>
-                    </div>
-                    <div class="stat-label">Articles en favoris</div>
-                </div>
-            </div>
-
-            <?php if ($isOwnProfile): ?>
-                <form class="profile-form" onsubmit="event.preventDefault(); updateProfile(this.username.value)">
-                    <div class="form-group">
-                        <label for="username">Nom d'utilisateur</label>
-                        <input type="text" id="username" name="username" value="<?= htmlspecialchars($user['Username']) ?>" class="form-input">
-                    </div>
-                    <button type="submit" class="user-action-btn update-profile-btn">
-                        Mettre à jour le profil
-                    </button>
-                </form>
-
-                <div class="password-section">
-                    <h2>Changer le mot de passe</h2>
-                    <form class="password-form" onsubmit="event.preventDefault(); updatePassword(this)">
-                        <div class="form-group">
-                            <label for="currentPassword">Mot de passe actuel</label>
-                            <input type="password" id="currentPassword" name="currentPassword" required class="form-input">
-                        </div>
-                        <div class="form-group">
-                            <label for="newPassword">Nouveau mot de passe</label>
-                            <input type="password" id="newPassword" name="newPassword" required class="form-input">
-                        </div>
-                        <button type="submit" class="user-action-btn update-password-btn">
-                            Modifier le mot de passe
-                        </button>
-                    </form>
-                </div>
-
-                <div class="balance-section">
-                    <input type="number" id="amount" name="amount" placeholder="Montant à ajouter" class="balance-input" min="1" step="0.01">
-                    <div class="user-actions">
-                        <button type="submit" class="user-action-btn add-balance-btn" onclick=" updateBalance(document.getElementById('amount').value)">
-                            Ajouter au solde
-                        </button>
-                        <button type="button" onclick="logout()" class="user-action-btn logout-btn">
-                            Déconnexion
-                        </button>
-                    </div>
-                </div>
-            <?php endif; ?>
         </div>
 
         <?php

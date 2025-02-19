@@ -19,6 +19,31 @@ function postArticle($name, $slug, $description, $price) {
     $stmt->close();
 }
 
+function createArticle($data) {
+    global $conn;
+    $sql = "INSERT INTO article (Name, Slug, Description, Price, Image_link, Id_owner, Publication_Date, Modification_Date) 
+            VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())";
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssdsi", 
+        $data['name'],
+        $data['slug'],
+        $data['description'],
+        $data['price'],
+        $data['image_link'],
+        $data['id_owner']
+    );
+    
+    if ($stmt->execute()) {
+        $id = $conn->insert_id;
+        $stmt->close();
+        return $id;
+    }
+    
+    $stmt->close();
+    return false;
+}
+
 function getAllArticles() {
     global $conn;
 
@@ -218,6 +243,32 @@ function updateUserPassword($userId, $currentPassword, $newPassword) {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("si", $hashedPassword, $userId);
     return $stmt->execute();
+}
+
+function updateArticle($data) {
+    global $conn;
+    $sql = "UPDATE article SET 
+            Name = ?, 
+            Slug = ?, 
+            Description = ?, 
+            Price = ?, 
+            Image_link = ?,
+            Modification_Date = NOW()
+            WHERE Id = ?";
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssdsi", 
+        $data['name'],
+        $data['slug'],
+        $data['description'],
+        $data['price'],
+        $data['image_link'],
+        $data['id']
+    );
+    
+    $result = $stmt->execute();
+    $stmt->close();
+    return $result;
 }
 
 $jsonData = json_encode([

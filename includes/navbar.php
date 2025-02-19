@@ -10,14 +10,17 @@
     </form>
     <div class="nav-icons">
         <?php if (isset($_SESSION['user'])): ?>
-            <a href="user.php?id=<?= htmlspecialchars($_SESSION['user']) ?>" class="user-info">
-                <div class="user-avatar" >
+            <a href="profile.php" class="user-info">
+                <div class="user-avatar">
                     <?php 
                         $user_session = getUserById($_SESSION["user"]);
                         echo strtoupper(substr($user_session["Username"], 0, 1));
                     ?>
                 </div>
                 <span class="user-name"><?= htmlspecialchars($user_session["Username"]) ?></span>
+            </a>
+            <a href="create_article.php" class="nav-icon" title="Créer un article">
+                <i class="fas fa-plus"></i>
             </a>
         <?php else: ?>
             <a href="login.php" class="nav-icon">

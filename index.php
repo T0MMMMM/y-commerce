@@ -32,7 +32,7 @@
             }
 
             usort($articles, function($a, $b) {
-                return $b["Publication_date"] <=> $a["Publication_date"];  // "<=>" retourne -1, 0 ou 1 selon la comparaison
+                return $b["Publication_date"] <=> $a["Publication_date"];
             });
             
 
@@ -40,15 +40,15 @@
             ?>
             <!-- Product card -->
             <div class="product-card" onclick="window.location.href='article.php?id=<?= htmlspecialchars($article['Id']) ?>&slug=<?= htmlspecialchars($article['Slug']) ?>'">
-                <img src="images/test_image.jpg" alt="Produit 1" class="product-image">
+                <img src="<?= htmlspecialchars($article['Image_link']) ?>" alt="<?= htmlspecialchars($article['Name']) ?>" class="product-image">
                 <div class="product-info">
                     <div>
-                        <h3 class="product-name"><?= $article["Name"] ?></h3>
-                        <p class="product-price"><?= $article["Price"] ?> €</p>
+                        <h3 class="product-name"><?= htmlspecialchars($article["Name"]) ?></h3>
+                        <p class="product-price"><?= htmlspecialchars($article["Price"]) ?> €</p>
                     </div>
-
-                    <button class="add-to-cart" value="add_to_cart" name="action" onclick="updateCart(<?= htmlspecialchars($article['Id']) ?>, -1)">Ajouter au panier</button>
-
+                    <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(<?= htmlspecialchars($article['Id']) ?>)">
+                        <i class="fas fa-shopping-cart"></i> Ajouter au panier
+                    </button>
                 </div>
             </div>
 
@@ -58,5 +58,6 @@
     </div>
 
     <?php include 'includes/footer.php'; ?>
+    <script src="javascript/actions.js"></script>
 </body>
 </html>
