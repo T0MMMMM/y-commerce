@@ -1,6 +1,8 @@
 <?php
 session_start();
-require_once 'crud.php';
+require_once "crudArticles.php";
+require_once "crudCommands.php";
+require_once "crudUser.php";
 require_once 'command.php';
 
 // Traiter les différentes actions

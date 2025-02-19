@@ -65,7 +65,11 @@ function updatePassword(form) {
 
     fetch('api/user_actions.php', {
         method: 'POST',
-        body: formData
+        body: new URLSearchParams({
+            'action': 'update_password',
+            'currentPassword': form.currentPassword.value,
+            'newPassword': form.newPassword.value
+        })
     })
     .then(response => response.json())
     .then(data => {

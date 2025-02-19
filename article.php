@@ -1,6 +1,9 @@
 <?php
 session_start();
-require_once 'api/crud.php';
+require_once "api/crudArticles.php";
+require_once "api/crudCommands.php";
+require_once "api/crudUser.php";
+
 require_once 'utils/utils.php';
 
 if (!isset($_GET['id']) || !isset($_GET['slug'])) {

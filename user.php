@@ -1,6 +1,10 @@
 <?php
 session_start();
-require_once 'api/crud.php';
+require_once "api/crudArticles.php";
+require_once "api/crudCommands.php";
+require_once "api/crudUser.php";
+require_once "api/command.php";
+
 
 // Vérifier si un ID est fourni dans l'URL
 if (!isset($_GET['id'])) {
