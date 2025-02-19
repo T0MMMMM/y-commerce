@@ -51,9 +51,9 @@ require_once 'api/cart.php';
                         <h3 class="cart-item-name"><?= $article["Name"] ?></h3>
                         <p class="cart-item-price"><?= $article["Price"] ?> €</p>
                         <div class="cart-item-quantity">
-                            <button class="quantity-btn minus" onclick="updateCart(<?= htmlspecialchars($article['Id']) ?>, -1)">-</button>
+                            <button class="quantity-btn-cart minus" onclick="updateCart(<?= htmlspecialchars($article['Id']) ?>, -1)">-</button>
                             <input type="text" value="<?= $_SESSION["cart"][$article["Id"]]["quantity"] ?>" min="1" class="quantity-input" disabled>
-                            <button class="quantity-btn plus" onclick="updateCart(<?= htmlspecialchars($article['Id']) ?>, 1)">+</button>
+                            <button class="quantity-btn-cart plus" onclick="updateCart(<?= htmlspecialchars($article['Id']) ?>, 1)">+</button>
                         </div>
                     </div>
                     <div class="cart-item-subtotal">

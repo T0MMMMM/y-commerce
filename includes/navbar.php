@@ -29,6 +29,11 @@ require_once "api/admin.php"; ?>
             <a href="create_article.php" class="nav-icon" title="Créer un article">
                 <i class="fas fa-plus"></i>
             </a>
+            <?php if (isAdmin()): ?>
+                <a href="admin.php" class="nav-icon" title="Administration">
+                    <i class="fas fa-cog"></i>
+                </a>
+            <?php endif; ?>
         <?php else: ?>
             <a href="login.php" class="nav-icon">
                 <i class="fas fa-user"></i>

@@ -126,5 +126,24 @@ function updateArticle($data) {
     return $result;
 }
 
+function deleteArticle($articleId) {
+    global $conn;
+    $sql = "DELETE FROM article WHERE Id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $articleId);
+    $result = $stmt->execute();
+    $stmt->close();
+    return $result;
+}
+
+function deleteUserArticles($userId) {
+    global $conn;
+    $sql = "DELETE FROM article WHERE Id_owner = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $userId);
+    $result = $stmt->execute();
+    $stmt->close();
+    return $result;
+}
 
 ?>

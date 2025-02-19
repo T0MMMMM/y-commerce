@@ -124,6 +124,16 @@ function updateUserPassword($userId, $currentPassword, $newPassword) {
     return $stmt->execute();
 }
 
+function deleteUser($userId) {
+    global $conn;
+    $sql = "DELETE FROM user WHERE Id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $userId);
+    $result = $stmt->execute();
+    $stmt->close();
+    return $result;
+}
+
 $jsonData = json_encode([
     "wishlist" => ["movies", "sports"]
 ]);

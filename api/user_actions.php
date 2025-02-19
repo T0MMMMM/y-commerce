@@ -13,7 +13,7 @@ switch ($_POST['action']) {
             echo json_encode(['error' => 'Invalid amount']);
             exit();
         }
-        updateBalance($_POST['amount']);
+        updateBalance($_POST['id'], $_POST['amount']);
         break;
 
     case 'update_profile':
@@ -22,9 +22,9 @@ switch ($_POST['action']) {
             echo json_encode(['error' => 'Invalid username']);
             exit();
         }
-        $user = getUserById($_SESSION['user']);
+        $user = getUserById($_POST['id']);
         if (!getUserByName($_POST["username"]) > 0) {
-            updateUserProfile($_SESSION['user'], $_POST['username']);
+            updateUserProfile($_POST['id'], $_POST['username']);
             echo json_encode(['success' => true, 'newUsername' => $_POST['username']]);
         }
         break;
@@ -35,7 +35,7 @@ switch ($_POST['action']) {
             exit();
         }
         
-        if (updateUserPassword($_SESSION['user'], $_POST['currentPassword'], $_POST['newPassword'])) {
+        if (updateUserPassword($_POST['id'], $_POST['currentPassword'], $_POST['newPassword'])) {
             echo json_encode(['success' => true]);
         } else {
             echo json_encode(['error' => 'Mot de passe actuel incorrect']);

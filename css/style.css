@@ -532,6 +532,16 @@ body {
     height: 95%;
 }
 
+.quantity-btn-cart {
+    background: none;
+    border: none;
+    color: #777;
+    font-size: 14px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
 .quantity-btn-card {
     height: 30px;
 }
@@ -1364,4 +1374,114 @@ body {
 
 .edit-article-btn:hover {
     background-color: #666;
+}
+
+/* Admin Page Styles */
+.admin-container {
+    padding: 100px 5% 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.admin-container h1 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.admin-section {
+    margin-bottom: 40px;
+}
+
+.admin-section h2 {
+    font-size: 24px;
+    color: #555;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.admin-item {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-item-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.admin-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.admin-item-image.user-avatar {
+    background-color: #777;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+}
+
+.admin-item-info h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.admin-item-info p {
+    color: #666;
+    font-size: 14px;
+}
+
+.admin-item-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.admin-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+}
+
+.edit-btn {
+    background-color: #777;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #666;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
 }

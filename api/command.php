@@ -38,8 +38,8 @@ function createDetailsCommand($articles): array {
     return $array;
 }
 
-function updateBalance(int $amount) {
-    $user = getUserById($_SESSION["user"]);
+function updateBalance($id, int $amount) {
+    $user = getUserById($id);
     $newValue = (float) $user["Balance"] + (float) $amount;
     updateUserBalance($_SESSION["user"], $newValue);
 }
