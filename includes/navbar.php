@@ -1,7 +1,9 @@
 <?php 
 require_once "api/crudArticles.php";
 require_once "api/crudCommands.php";
-require_once "api/crudUser.php"; ?>
+require_once "api/crudUser.php";
+require_once "api/admin.php"; ?>
+
 <nav class="navbar" id="navbar">
     <a class="brand" href="/y-commerce">y-commerce.</a>
     <form action="/y-commerce" method="get" class="search-bar">
@@ -13,11 +15,16 @@ require_once "api/crudUser.php"; ?>
     </form>
     <div class="nav-icons">
         <?php if (isset($_SESSION['user'])): ?>
+            <?php if (isAdmin()): ?>
+                <button>⚡ Bouton Admin ⚡</button>
+            <?php endif; ?>
+            
             <a href="user.php?id=<?= htmlspecialchars($_SESSION['user']) ?>" class="user-info">
                 <div class="user-avatar" >
                     <?php 
                         $user_session = getUserById($_SESSION["user"]);
                         echo strtoupper(substr($user_session["Username"], 0, 1));
+
                     ?>
                 </div>
                 <span class="user-name"><?= htmlspecialchars($user_session["Username"]) ?></span>

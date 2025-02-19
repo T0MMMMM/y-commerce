@@ -1,6 +1,5 @@
 <?php 
 
-
 require_once 'cart.php';
 
 function command() {
@@ -50,7 +49,6 @@ if (isset($_POST["action"]) && $_POST["action"] == "create_command") {
 }
 
 $user = getUserById($_SESSION['user']);
-echo $user["Username"];
 
 
 ?>

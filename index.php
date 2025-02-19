@@ -24,6 +24,8 @@
         <!-- Products section -->
         <div class="products">
             <?php
+            require_once "api/admin.php";
+
             
             if (isset($_GET["search-bar"])) {
                 $articles = getArticlesByName($_GET["search-bar"]);

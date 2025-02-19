@@ -10,41 +10,63 @@ require_once "crudUser.php";
 
 function register($Username, $Password, $role) {
     global $key;
+    $response = [];
+
     if (empty($Username) || empty($Password)) {
-        echo "Username and Password are required";
-        return;
+        $response['success'] = false;
+        $response['error'] = "Username and Password are required";
+        echo json_encode($response);
+        return;    
     }
     if (strlen($Username) < 5 || strlen($Username) > 20 ) {
-        echo "Username must be between 5 and 20 characters";
-        return;
+        $response['success'] = false;
+        $response['error'] = "Username must be between 5 and 20 characters";
+        echo json_encode($response);
+        return;    
     }
     if (strlen($Password) < 5) {
-        echo "Password must be at least 5 characters";
-        return;
+        $response['success'] = false;
+        $response['error'] = "Password must be at least 5 characters";
+        echo json_encode($response);
+        return;   
     }
     if (!getUserByName($Username) > 0) {
         $hashedPassword = password_hash($Password, PASSWORD_BCRYPT);
         postUser($Username, $hashedPassword, $role);
         login($Username, $Password);
+        $response['success'] = true;
+        echo json_encode($response);
+
     } else {
-        echo "Username already exists";
+        $response['success'] = false;
+        $response['error'] = "Username already exists";
+        echo json_encode($response);
     }
 }
 
 function login($Username, $Password) {
+    $response = [];
     if (empty($Username) || empty($Password)) {
-        echo "Username and Password are required";
-        return;
+        $response['success'] = false;
+        $response['error'] = "Username and Password are required";
+        echo json_encode($response);
+        return;    
     }
     $user = getUserByName($Username);
     if (empty($user)) {
-        echo "Username does not exist";
-        return;
+        $response['success'] = false;
+        $response['error'] = "Username already in use";
+        echo json_encode($response); 
+        return;       
     }
-    if (!password_verify($Password, $user['Password'])) {
-        echo "Password is incorrect";
-        return;
+    if (!password_verify($Password, $user['Password'])) { 
+        $response['success'] = false;
+        $response['error'] = "Password is incorrect";;
+        echo json_encode($response);
+        return;    
     }
+    $response['success'] = true;
+    echo json_encode($response);
     $_SESSION["user"] = $user["Id"];
 }
 

@@ -41,6 +41,29 @@ function getUserByName($name) {
     return $user;
 }
 
+function getUserRoles(int $userId) {
+    global $conn;
+    $sql = "SELECT role FROM user WHERE id = ?";  
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        error_log("Erreur de préparation SQL: " . $conn->error);
+        return [];
+    }
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $roles = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+    $decoded = json_decode($roles[0]["role"], true);
+    return ($decoded);
+}
+
+// // Une fois l'utilisateur authentifié :
+// $userId = $_SESSION['user_id']; // ID de l'utilisateur après connexion
+// $userRoles = getUserRoles($userId, $pdo);
+
+
+
 function postUser($Username, $Password, $Role) {
     global $conn;
     $sql = "INSERT INTO user (Username, Password, Balance, Avatar, Role, Wishlist, Creation_Date, Modification_Date) VALUES (?, ?, ?, ?, ?, ?, NOW(), null)";

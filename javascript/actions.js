@@ -29,10 +29,13 @@ function handleAuth(event, action) {
         credentials: 'include', // Include cookies in the request
         body: formData
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
-        console.log(data);
-        window.location.href = 'index.php';
+        if (!data.success) {
+            alert("Erreur : " + data.error);
+        } else {
+            window.location.href = 'index.php';
+        }
     })
     .catch(error => console.error('Error:', error));
 }
