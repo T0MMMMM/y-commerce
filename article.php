@@ -41,17 +41,32 @@ if ($article['Slug'] !== $_GET['slug'] || $article["Id"] !== (int) $_GET['id']) 
             <div class="single-article-price"><?= htmlspecialchars($article['Price']) ?> €</div>
             <div class="single-article-description"><?= htmlspecialchars($article['Description']) ?></div>
             <div class="single-article-actions">
-                <button class="add-to-cart-btn" onclick="addToCart(<?= htmlspecialchars($article['Id']) ?>)">
-                    <i class="fas fa-shopping-cart"></i> Ajouter au panier
-                </button>
-                <button class="add-to-wishlist-btn" onclick="addToWishlist(<?= htmlspecialchars($article['Id']) ?>)">
-                    <i class="fas fa-heart"></i> Ajouter aux favoris
-                </button>
-                <?php if (isset($_SESSION['user']) && $_SESSION['user'] === $article['Id_owner']): ?>
-                    <a href="edit_article.php?id=<?= $article['Id'] ?>" class="edit-article-btn">
-                        <i class="fas fa-edit"></i> Modifier
-                    </a>
+                <?php if (isset($_SESSION['cart'][$article['Id']])): ?>
+                    <div class="cart-controls">
+                        <button class="quantity-btn" onclick="updateCart(<?= $article['Id'] ?>, -1)">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <span class="quantity"><?= $_SESSION['cart'][$article['Id']]['quantity'] ?></span>
+                        <button class="quantity-btn" onclick="updateCart(<?= $article['Id'] ?>, 1)">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                <?php else: ?>
+                    <button class="add-to-cart-btn" onclick="addToCart(<?= htmlspecialchars($article['Id']) ?>)">
+                        <i class="fas fa-shopping-cart"></i> Ajouter au panier
+                    </button>
                 <?php endif; ?>
+                <div class="secondary-actions">
+                    <button class="add-to-wishlist-btn" onclick="addToWishlist(<?= htmlspecialchars($article['Id']) ?>)" 
+                            style="<?= !isset($_SESSION['user']) || $_SESSION['user'] !== $article['Id_owner'] ? 'width: 100%;' : '' ?>">
+                        <i class="fas fa-heart"></i> Ajouter aux favoris
+                    </button>
+                    <?php if (isset($_SESSION['user']) && $_SESSION['user'] === $article['Id_owner']): ?>
+                        <a href="edit_article.php?id=<?= $article['Id'] ?>" class="edit-article-btn">
+                            <i class="fas fa-edit"></i> Modifier
+                        </a>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>
