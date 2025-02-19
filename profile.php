@@ -23,23 +23,23 @@ $user = getUserById($_SESSION['user']);
         <div class="user-profile-card">
             <div class="user-header">
                 <div class="user-avatar">
-                    <?= strtoupper(substr($user["Username"], 0, 1)) ?>
+                    <?= strtoupper(substr($user["username"], 0, 1)) ?>
                 </div>
                 <div class="user-info-header">
-                    <h1><?= htmlspecialchars($user['Username']) ?></h1>
-                    <span class="user-role"><?= htmlspecialchars($user['Role']) ?></span>
+                    <h1><?= htmlspecialchars($user['username']) ?></h1>
+                    <span class="user-role"><?= htmlspecialchars($user['role']) ?></span>
                 </div>
             </div>
 
             <div class="user-stats">
                 <div class="stat-card">
-                    <div class="stat-value"><?= htmlspecialchars($user['Balance']) ?> €</div>
+                    <div class="stat-value"><?= htmlspecialchars($user['balance']) ?> €</div>
                     <div class="stat-label">Solde disponible</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">
                         <?php 
-                            $wishlist = json_decode($user['Wishlist'], true);
+                            $wishlist = json_decode($user['wishlist'], true);
                             echo count($wishlist['wishlist'] ?? []);
                         ?>
                     </div>
@@ -50,7 +50,7 @@ $user = getUserById($_SESSION['user']);
             <form class="profile-form" onsubmit="event.preventDefault(); updateProfile(this.username.value)">
                 <div class="form-group">
                     <label for="username">Nom d'utilisateur</label>
-                    <input type="text" id="username" name="username" value="<?= htmlspecialchars($user['Username']) ?>" class="form-input">
+                    <input type="text" id="username" name="username" value="<?= htmlspecialchars($user['username']) ?>" class="form-input">
                 </div>
                 <button type="submit" class="user-action-btn update-profile-btn">
                     Mettre à jour le profil

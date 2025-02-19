@@ -6,10 +6,10 @@ function command() {
     $total = 0;
     $cart = getCart();
     foreach ($cart as $article):
-        $total += $article['Price']*$_SESSION["cart"][$article["Id"]]["quantity"];
+        $total += $article["price"]*$_SESSION["cart"][$article["id"]]["quantity"];
     endforeach;
     $user = getUserById($_SESSION["user"]);
-    if ($total > $user["Balance"]) {
+    if ($total > $user["balance"]) {
         echo "Solde insuffisant";
         return;
     } else {
@@ -30,9 +30,9 @@ function createCommand($total) {
 function createDetailsCommand($articles): array {
     $array = [];
     foreach ($articles as $article):
-        $articleid = (int) $article["Id"];
-        $quantity = (int) $_SESSION["cart"][$article["Id"]]["quantity"];
-        echo $_SESSION["cart"][$article["Id"]]["quantity"];
+        $articleid = (int) $article["id"];
+        $quantity = (int) $_SESSION["cart"][$article["id"]]["quantity"];
+        echo $_SESSION["cart"][$article["id"]]["quantity"];
         array_push($array, createOrderDetails($articleid, $quantity));
     endforeach;
     return $array;
@@ -40,7 +40,7 @@ function createDetailsCommand($articles): array {
 
 function updateBalance(int $amount) {
     $user = getUserById($_SESSION["user"]);
-    $newValue = (float) $user["Balance"] + (float) $amount;
+    $newValue = (float) $user["balance"] + (float) $amount;
     updateUserBalance($_SESSION["user"], $newValue);
 }
 

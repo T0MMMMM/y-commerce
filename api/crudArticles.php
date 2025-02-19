@@ -5,9 +5,9 @@ require_once 'config.php';
 
 function getArticleById($id) {
     global $conn;
-    $sql = "SELECT a.*, u.Username as Author, u.Id as AuthorId
+    $sql = "SELECT a.*, u.username as Author, u.id as AuthorId
             FROM article a 
-            LEFT JOIN user u ON a.Id_owner = u.Id 
+            LEFT JOIN user u ON a.owner_id = u.id 
             WHERE a.id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
@@ -45,25 +45,9 @@ function getArticlesByName($name) {
     return $articles;
 }
 
-function postArticle($name, $slug, $description, $price) {
-    global $conn;
-    $sql = "INSERT INTO article (Name, Slug, Description, Price, Publication_Date, Modification_Date) 
-        VALUES (?, ?, ?, ?, NOW(), NOW())";   
-    
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssd", $name, $slug, $description, $price);
-    if ($stmt->execute()) {
-        echo "good";
-        return $conn->insert_id;
-    } else {
-        echo "failed to create article";
-    }
-    $stmt->close();
-}
-
 function createArticle($data) {
     global $conn;
-    $sql = "INSERT INTO article (Name, Slug, Description, Price, Image_link, Id_owner, Publication_Date, Modification_Date) 
+    $sql = "INSERT INTO article (name, slug, description, price, image_link, owner_id, publication_date, modification_date) 
             VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())";
     
     $stmt = $conn->prepare($sql);
@@ -88,11 +72,11 @@ function createArticle($data) {
 
 function getUserArticles($userId) {
     global $conn;
-    $sql = "SELECT a.*, u.Username as Author 
+    $sql = "SELECT a.*, u.username as Author 
             FROM article a 
-            JOIN user u ON a.Id_owner = u.Id 
-            WHERE a.Id_owner = ? 
-            ORDER BY a.Publication_Date DESC";
+            JOIN user u ON a.owner_id = u.Id 
+            WHERE a.owner_id = ? 
+            ORDER BY a.publication_date DESC";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $userId);
     $stmt->execute();
@@ -103,14 +87,13 @@ function getUserArticles($userId) {
 function updateArticle($data) {
     global $conn;
     $sql = "UPDATE article SET 
-            Name = ?, 
-            Slug = ?, 
-            Description = ?, 
-            Price = ?, 
-            Image_link = ?,
-            Modification_Date = NOW()
-            WHERE Id = ?";
-    
+            name = ?, 
+            slug = ?, 
+            description = ?, 
+            price = ?, 
+            image_link = ?,
+            modification_date = NOW()
+            WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssdsi", 
         $data['name'],

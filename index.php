@@ -35,32 +35,32 @@
             }
 
             usort($articles, function($a, $b) {
-                return $b["Publication_date"] <=> $a["Publication_date"];
+                return $b["publication_date"] <=> $a["publication_date"];
             });
             
 
             foreach ($articles as $article):
             ?>
             <!-- Product card -->
-            <div class="product-card" onclick="window.location.href='article.php?id=<?= htmlspecialchars($article['Id']) ?>&slug=<?= htmlspecialchars($article['Slug']) ?>'">
-                <img src="<?= htmlspecialchars($article['Image_link']) ?>" alt="<?= htmlspecialchars($article['Name']) ?>" class="product-image">
+            <div class="product-card" onclick="window.location.href='article.php?id=<?= htmlspecialchars($article['id']) ?>&slug=<?= htmlspecialchars($article['slug']) ?>'">
+                <img src="<?= htmlspecialchars($article['image_link']) ?>" alt="<?= htmlspecialchars($article['name']) ?>" class="product-image">
                 <div class="product-info">
                     <div>
-                        <h3 class="product-name"><?= htmlspecialchars($article["Name"]) ?></h3>
-                        <p class="product-price"><?= htmlspecialchars($article["Price"]) ?> €</p>
+                        <h3 class="product-name"><?= htmlspecialchars($article["name"]) ?></h3>
+                        <p class="product-price"><?= htmlspecialchars($article["price"]) ?> €</p>
                     </div>
-                    <?php if (isset($_SESSION['cart'][$article['Id']])): ?>
+                    <?php if (isset($_SESSION['cart'][$article['id']])): ?>
                         <div class="cart-controls" onclick="event.stopPropagation();">
-                            <button class="quantity-btn quantity-btn-card" onclick="updateCart(<?= $article['Id'] ?>, -1)">
+                            <button class="quantity-btn quantity-btn-card" onclick="updateCart(<?= $article['id'] ?>, -1)">
                                 <i class="fas fa-minus"></i>
                             </button>
-                            <span class="quantity"><?= $_SESSION['cart'][$article['Id']]['quantity'] ?></span>
-                            <button class="quantity-btn quantity-btn-card" onclick="updateCart(<?= $article['Id'] ?>, 1)">
+                            <span class="quantity"><?= $_SESSION['cart'][$article['id']]['quantity'] ?></span>
+                            <button class="quantity-btn quantity-btn-card" onclick="updateCart(<?= $article['id'] ?>, 1)">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </div>
                     <?php else: ?>
-                        <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(<?= htmlspecialchars($article['Id']) ?>)">
+                        <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(<?= htmlspecialchars($article['id']) ?>)">
                             <i class="fas fa-shopping-cart"></i> Ajouter au panier
                         </button>
                     <?php endif; ?>

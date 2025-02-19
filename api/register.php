@@ -73,7 +73,7 @@ function login($Username, $Password) {
     }
     $response['success'] = true;
     echo json_encode($response);
-    $_SESSION["user"] = $user["Id"];
+    $_SESSION["user"] = $user["id"];
 }
 
 if (isset($_POST["action"]) && $_POST["action"] == "login") {

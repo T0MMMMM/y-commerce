@@ -20,11 +20,11 @@ require_once "api/admin.php"; ?>
                     <?php 
                     
                         $user_session = getUserById($_SESSION["user"]);
-                        echo strtoupper(substr($user_session["Username"], 0, 1));
+                        echo strtoupper(substr($user_session["username"], 0, 1));
 
                     ?>
                 </div>
-                <span class="user-name"><?= htmlspecialchars($user_session["Username"]) ?></span>
+                <span class="user-name"><?= htmlspecialchars($user_session["username"]) ?></span>
             </a>
             <a href="create_article.php" class="nav-icon" title="Créer un article">
                 <i class="fas fa-plus"></i>

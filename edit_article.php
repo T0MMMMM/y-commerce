@@ -35,29 +35,29 @@ if (!$article || $article['Id_owner'] !== $_SESSION['user']) {
         <div class="create-article-card">
             <h1>Modifier l'article</h1>
             
-            <form onsubmit="event.preventDefault(); updateArticle(this, <?= $article['Id'] ?>)" class="create-article-form">
+            <form onsubmit="event.preventDefault(); updateArticle(this, <?= $article['id'] ?>)" class="create-article-form">
                 <div class="form-group">
                     <label for="name">Nom de l'article*</label>
                     <input type="text" id="name" name="name" required class="form-input" 
-                           value="<?= htmlspecialchars($article['Name']) ?>">
+                           value="<?= htmlspecialchars($article['name']) ?>">
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description*</label>
                     <textarea id="description" name="description" required class="form-input" 
-                              rows="5"><?= htmlspecialchars($article['Description']) ?></textarea>
+                              rows="5"><?= htmlspecialchars($article['description']) ?></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="price">Prix (€)*</label>
                     <input type="number" id="price" name="price" step="0.01" min="0" required 
-                           class="form-input" value="<?= htmlspecialchars($article['Price']) ?>">
+                           class="form-input" value="<?= htmlspecialchars($article['price']) ?>">
                 </div>
 
                 <div class="form-group">
                     <label for="image_link">Lien de l'image</label>
                     <input type="url" id="image_link" name="image_link" class="form-input" 
-                           value="<?= htmlspecialchars($article['Image_link']) ?>">
+                           value="<?= htmlspecialchars($article['image_link']) ?>">
                 </div>
 
                 <button type="submit" class="create-article-btn">

@@ -4,7 +4,7 @@ require_once 'config.php';
 
 function getCommandsByUserId(int $userId): array {
     global $conn;
-    $sql = "SELECT * FROM orders WHERE id_user = ?";  
+    $sql = "SELECT * FROM order WHERE user_id = ?";  
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
         error_log("Erreur de préparation SQL: " . $conn->error);
@@ -21,7 +21,7 @@ function getCommandsByUserId(int $userId): array {
 
 function createOrderDetails(int $ArticleId, int $Quantity): int {
     global $conn;
-    $sql = "INSERT INTO order_details (Id_article, Article_number) VALUES (?, ?)";
+    $sql = "INSERT INTO order_details (article_id, quantity) VALUES (?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ii", $ArticleId, $Quantity);
     $stmt->execute();
@@ -32,8 +32,8 @@ function createOrderDetails(int $ArticleId, int $Quantity): int {
 
 function createOrder(int $userId, int $totalAmount, array $articlesList): int {
     global $conn;
-    $sql = "INSERT INTO orders (id_user, Transaction_date, Total_amount, Articles_list, Address, Place, CP) 
-        VALUES (?, NOW(), ?, ?, address, place, cp)";
+    $sql = "INSERT INTO order (user_id, transaction_date, total_price, article_list, adress) 
+        VALUES (?, NOW(), ?, ?, Montpellier)";
     $stmt = $conn->prepare($sql);
     $out = array_values($articlesList);
     $value = json_encode($out);

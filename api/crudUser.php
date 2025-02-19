@@ -31,7 +31,7 @@ function getUserById($id) {
 
 function getUserByName($name) {
     global $conn;
-    $sql = "SELECT * FROM user WHERE Username = ?";
+    $sql = "SELECT * FROM user WHERE username = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $name);
     $stmt->execute();
@@ -66,12 +66,13 @@ function getUserRoles(int $userId) {
 
 function postUser($Username, $Password, $Role) {
     global $conn;
-    $sql = "INSERT INTO user (Username, Password, Balance, Avatar, Role, Wishlist, Creation_Date, Modification_Date) VALUES (?, ?, ?, ?, ?, ?, NOW(), null)";
+    $mail = "test@gmaiL.com";
+    $sql = "INSERT INTO user (username, mail, password, balance, profil_image, role, wishlist, creation_date, modification_date) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), null)";
     $stmt = $conn->prepare($sql);
     $Balance = 0;
     $Avatar = "";
     $Wishlist = json_encode(["wishlist" => []]);
-    $stmt->bind_param("ssisss",$Username, $Password, $Balance, $Avatar, $Role, $Wishlist);
+    $stmt->bind_param("sdsisss",$Username, $Password, $mail, $Balance, $Avatar, $Role, $Wishlist);
     if ($stmt->execute()) {
         return $conn->insert_id;
     } else {
@@ -82,7 +83,7 @@ function postUser($Username, $Password, $Role) {
 
 function updateUserProfile($userId, $username) {
     global $conn;
-    $sql = "UPDATE user SET Username = ? WHERE Id = ?";
+    $sql = "UPDATE user SET username = ? WHERE Id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("si", $username, $userId);
     updateUserModificationDate($userId);
@@ -93,7 +94,7 @@ function updateUserProfile($userId, $username) {
 
 function updateUserBalance(int $id, $value) {
     global $conn;
-    $sql = "UPDATE user SET Balance = ? WHERE id = ?";
+    $sql = "UPDATE user SET balance = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ii", $value, $id);
     $stmt->execute();
@@ -102,7 +103,7 @@ function updateUserBalance(int $id, $value) {
 
 function updateUserModificationDate(int $id) {
     global $conn;
-    $sql = "UPDATE user SET Modification_Date = NOW() WHERE id = ?";
+    $sql = "UPDATE user SET modification_date = NOW() WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -112,13 +113,11 @@ function updateUserModificationDate(int $id) {
 function updateUserPassword($userId, $currentPassword, $newPassword) {
     global $conn;
     $user = getUserById($userId);
-    
-    if (!password_verify($currentPassword, $user['Password'])) {
+    if (!password_verify($currentPassword, $user['password'])) {
         return false;
     }
-    
     $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-    $sql = "UPDATE user SET Password = ? WHERE Id = ?";
+    $sql = "UPDATE user SET password = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("si", $hashedPassword, $userId);
     return $stmt->execute();

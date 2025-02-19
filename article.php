@@ -14,7 +14,7 @@ if (!isset($_GET['id']) || !isset($_GET['slug'])) {
 $article = getArticleById($_GET['id']);
 
 // Vérification si le slug dans l'URL correspond au slug de l'article
-if ($article['Slug'] !== $_GET['slug'] || $article["Id"] !== (int) $_GET['id']) {
+if ($article['slug'] !== $_GET['slug'] || $article["Id"] !== (int) $_GET['id']) {
     header("Location: index.php");
     exit();
 }
@@ -24,7 +24,7 @@ if ($article['Slug'] !== $_GET['slug'] || $article["Id"] !== (int) $_GET['id']) 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($article['Name']) ?> - y-commerce</title>
+    <title><?= htmlspecialchars($article['name']) ?> - y-commerce</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -32,40 +32,40 @@ if ($article['Slug'] !== $_GET['slug'] || $article["Id"] !== (int) $_GET['id']) 
     
     <div class="single-article-container">
         <div class="article-image-container">
-            <img src="images/test_image.jpg" alt="<?= htmlspecialchars($article['Name']) ?>" class="single-article-image">
+            <img src="images/test_image.jpg" alt="<?= htmlspecialchars($article['name']) ?>" class="single-article-image">
         </div>
         <div class="article-info-container">
-            <h1 class="single-article-title"><?= htmlspecialchars($article['Name']) ?></h1>
+            <h1 class="single-article-title"><?= htmlspecialchars($article['name']) ?></h1>
             <div class="article-metadata">
                 <span class="article-author">Par <a href="/y-commerce/user.php?u=<?= htmlspecialchars($article['Author']) ?>"><?= htmlspecialchars($article['Author']) ?></a></span>
-                <span class="article-date">Publié le <?= date('d/m/Y', strtotime($article['Publication_date'])) ?></span>
-                <span class="article-slug">#<?= htmlspecialchars($article['Slug']) ?></span>
+                <span class="article-date">Publié le <?= date('d/m/Y', strtotime($article['publication_date'])) ?></span>
+                <span class="article-slug">#<?= htmlspecialchars($article['slug']) ?></span>
             </div>
-            <div class="single-article-price"><?= htmlspecialchars($article['Price']) ?> €</div>
-            <div class="single-article-description"><?= htmlspecialchars($article['Description']) ?></div>
+            <div class="single-article-price"><?= htmlspecialchars($article['price']) ?> €</div>
+            <div class="single-article-description"><?= htmlspecialchars($article['description']) ?></div>
             <div class="single-article-actions">
-                <?php if (isset($_SESSION['cart'][$article['Id']])): ?>
+                <?php if (isset($_SESSION['cart'][$article['id']])): ?>
                     <div class="cart-controls">
-                        <button class="quantity-btn" onclick="updateCart(<?= $article['Id'] ?>, -1)">
+                        <button class="quantity-btn" onclick="updateCart(<?= $article['id'] ?>, -1)">
                             <i class="fas fa-minus"></i>
                         </button>
-                        <span class="quantity"><?= $_SESSION['cart'][$article['Id']]['quantity'] ?></span>
-                        <button class="quantity-btn" onclick="updateCart(<?= $article['Id'] ?>, 1)">
+                        <span class="quantity"><?= $_SESSION['cart'][$article['id']]['quantity'] ?></span>
+                        <button class="quantity-btn" onclick="updateCart(<?= $article['id'] ?>, 1)">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
                 <?php else: ?>
-                    <button class="add-to-cart-btn" onclick="addToCart(<?= htmlspecialchars($article['Id']) ?>)">
+                    <button class="add-to-cart-btn" onclick="addToCart(<?= htmlspecialchars($article['id']) ?>)">
                         <i class="fas fa-shopping-cart"></i> Ajouter au panier
                     </button>
                 <?php endif; ?>
                 <div class="secondary-actions">
-                    <button class="add-to-wishlist-btn" onclick="addToWishlist(<?= htmlspecialchars($article['Id']) ?>)" 
-                            style="<?= !isset($_SESSION['user']) || $_SESSION['user'] !== $article['Id_owner'] ? 'width: 100%;' : '' ?>">
+                    <button class="add-to-wishlist-btn" onclick="addToWishlist(<?= htmlspecialchars($article['id']) ?>)" 
+                            style="<?= !isset($_SESSION['user']) || $_SESSION['user'] !== $article['owner_id'] ? 'width: 100%;' : '' ?>">
                         <i class="fas fa-heart"></i> Ajouter aux favoris
                     </button>
                     <?php if (isset($_SESSION['user']) && $_SESSION['user'] === $article['Id_owner']): ?>
-                        <a href="edit_article.php?id=<?= $article['Id'] ?>" class="edit-article-btn">
+                        <a href="edit_article.php?id=<?= $article['id'] ?>" class="edit-article-btn">
                             <i class="fas fa-edit"></i> Modifier
                         </a>
                     <?php endif; ?>
