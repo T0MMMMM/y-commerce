@@ -8,14 +8,19 @@ require_once "crudArticles.php";
 require_once "crudCommands.php";
 require_once "crudUser.php";
 
-function register($Username, $Password, $role) {
+function register($Username, $Password, $ConfirmPassword, $role) {
     global $key;
     $response = [];
     $response['success'] = true;
-
     if (empty($Username) || empty($Password)) {
         $response['success'] = false;
         $response['error'] = "Username and Password are required";
+        echo json_encode($response);
+        return;    
+    }
+    if ($Password != $ConfirmPassword) {
+        $response['success'] = false;
+        $response['error'] = "Passwords must match";
         echo json_encode($response);
         return;    
     }
@@ -76,8 +81,8 @@ if (isset($_POST["action"]) && $_POST["action"] == "login") {
         login($_POST["username"], $_POST["password"]);
     }
 } if (isset($_POST["action"]) && $_POST["action"] == "register") {
-    if (isset($_POST["username"]) && $_POST["password"]) {
-        register($_POST["username"], $_POST["password"], role: json_encode(["role" => ["user"]]));
+    if (isset($_POST["username"]) && $_POST["password"] && $_POST["confirm_password"]) {
+        register($_POST["username"], $_POST["password"], $_POST["confirm_password"], role: json_encode(["role" => ["user"]]));
     }
 }
 
