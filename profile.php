@@ -88,18 +88,18 @@ $user = getUserById($_SESSION['user']);
         </div>
 
         <?php
-        $userArticles = getUserArticles($user['Id']);
+        $userArticles = getUserArticles($user['id']);
         if (!empty($userArticles)): ?>
             <div class="user-articles">
                 <h2>Mes articles en vente</h2>
                 <div class="articles-grid">
                     <?php foreach ($userArticles as $article): ?>
-                        <div class="product-card" onclick="window.location.href='article.php?id=<?= $article['Id'] ?>&slug=<?= $article['Slug'] ?>'">
-                            <img src="images/test_image.jpg" alt="<?= htmlspecialchars($article['Name']) ?>" class="product-image">
+                        <div class="product-card" onclick="window.location.href='article.php?id=<?= $article['id'] ?>&slug=<?= $article['slug'] ?>'">
+                            <img src="images/test_image.jpg" alt="<?= htmlspecialchars($article['name']) ?>" class="product-image">
                             <div class="product-info">
-                                <h3 class="product-name"><?= htmlspecialchars($article['Name']) ?></h3>
-                                <p class="product-price"><?= htmlspecialchars($article['Price']) ?> €</p>
-                                <p class="product-date">Publié le <?= date('d/m/Y', strtotime($article['Publication_date'])) ?></p>
+                                <h3 class="product-name"><?= htmlspecialchars($article['name']) ?></h3>
+                                <p class="product-price"><?= htmlspecialchars($article['price']) ?> €</p>
+                                <p class="product-date">Publié le <?= date('d/m/Y', strtotime($article['publication_date'])) ?></p>
                             </div>
                         </div>
                     <?php endforeach; ?>

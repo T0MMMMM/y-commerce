@@ -59,7 +59,7 @@ require_once 'api/cart.php';
                     <div class="cart-item-subtotal">
                         <p><?= $article["price"]*$_SESSION["cart"][$article["id"]]["quantity"] ?> €</p>
                     </div>
-                    <button class="remove-item" onclick="removeFromCart(<?= htmlspecialchars($article['Id']) ?>)"><i class="fas fa-trash-alt"></i></button>
+                    <button class="remove-item" onclick="removeFromCart(<?= htmlspecialchars($article['id']) ?>)"><i class="fas fa-trash-alt"></i></button>
                     
                 </div>
 

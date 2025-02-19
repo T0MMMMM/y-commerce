@@ -26,6 +26,9 @@ switch ($_POST['action']) {
         if (!getUserByName($_POST["username"]) > 0) {
             updateUserProfile($_SESSION['user'], $_POST['username']);
             echo json_encode(['success' => true, 'newUsername' => $_POST['username']]);
+        } else {
+            echo json_encode(['error' => 'Username arleady used']);
+            exit();
         }
         break;
 
@@ -34,7 +37,12 @@ switch ($_POST['action']) {
             echo json_encode(['error' => 'Données manquantes']);
             exit();
         }
-        
+        if (strlen($_POST['newPassword']) < 5) {
+            $response['success'] = false;
+            $response['error'] = "New Password must be at least 5 characters";
+            echo json_encode($response);
+            exit();
+        }        
         if (updateUserPassword($_SESSION['user'], $_POST['currentPassword'], $_POST['newPassword'])) {
             echo json_encode(['success' => true]);
         } else {

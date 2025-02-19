@@ -10,7 +10,7 @@ function addToCart(productId) {
             'action': 'add_to_cart'
         })
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
         console.log(data);
         location.reload();

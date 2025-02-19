@@ -73,9 +73,7 @@ if (isset($_POST['action'])) {
             getCart();
             break;
     }
-    if (isset($_POST["path"])) {
-        header("Location: http://localhost/y-commerce" . $_POST["path"]);
-        exit();
-    }
+    echo'{"success": true}';
+    exit();
 }
 ?>

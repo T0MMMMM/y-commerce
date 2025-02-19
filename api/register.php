@@ -34,7 +34,7 @@ function register($Username, $Password, $ConfirmPassword, $role) {
         $response['success'] = false;
         $response['error'] = "Password must be at least 5 characters";
         echo json_encode($response);
-        return;   
+        return;
     }
     if (!getUserByName($Username) > 0) {
         $hashedPassword = password_hash($Password, PASSWORD_BCRYPT);
@@ -65,15 +65,15 @@ function login($Username, $Password) {
         echo json_encode($response); 
         return;       
     }
-    if (!password_verify($Password, $user['Password'])) { 
+    if (!password_verify($Password, $user['password'])) { 
         $response['success'] = false;
         $response['error'] = "Password is incorrect";;
         echo json_encode($response);
         return;    
     }
     $response['success'] = true;
-    echo json_encode($response);
     $_SESSION["user"] = $user["id"];
+    echo json_encode($response);
 }
 
 if (isset($_POST["action"]) && $_POST["action"] == "login") {

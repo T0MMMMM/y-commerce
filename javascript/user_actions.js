@@ -1,4 +1,8 @@
 function updateBalance(amount) {
+    if (amount <= 0) {
+        alert("Erreur : " + "Veuillez rentrer un montant positif");
+        return;
+    }
     fetch('api/user_actions.php', {
         method: 'POST',
         headers: {
@@ -10,10 +14,13 @@ function updateBalance(amount) {
             'action': 'update_balance'
         })
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
-        console.log(data);
-        location.reload();
+        if (!data.success) {
+            alert("Erreur : " + data.error);
+        } else {
+            window.location.href = 'index.php';
+        };
     })
     .catch(error => console.error('Error:', error));
 }
@@ -30,10 +37,13 @@ function updateProfile(username) {
             'action': 'update_profile'
         })
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
-        console.log(data);
-        location.reload();
+        if (!data.success) {
+            alert("Erreur : " + data.error);
+        } else {
+            window.location.href = 'index.php';
+        }
     })
     .catch(error => console.error('Error:', error));
 }
@@ -49,7 +59,7 @@ function logout() {
             'action': 'logout'
         })
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
         console.log(data);
         window.location.href = 'index.php';
@@ -70,10 +80,13 @@ function updatePassword(currentPassword, newPassword) {
             'newPassword': newPassword
         })
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
-        console.log(data);
-        location.reload();
+        if (!data.success) {
+            alert("Erreur : " + data.error);
+        } else {
+            location.reload();
+        }
     })
     .catch(error => {
         console.error('Error:', error);

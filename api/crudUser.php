@@ -66,13 +66,13 @@ function getUserRoles(int $userId) {
 
 function postUser($Username, $Password, $Role) {
     global $conn;
-    $mail = "test@gmaiL.com";
+    $mail = "test@gmail.com";
     $sql = "INSERT INTO user (username, mail, password, balance, profil_image, role, wishlist, creation_date, modification_date) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), null)";
     $stmt = $conn->prepare($sql);
     $Balance = 0;
     $Avatar = "";
     $Wishlist = json_encode(["wishlist" => []]);
-    $stmt->bind_param("sdsisss",$Username, $Password, $mail, $Balance, $Avatar, $Role, $Wishlist);
+    $stmt->bind_param("sssisss",$Username, $mail, $Password, $Balance, $Avatar, $Role, $Wishlist);
     if ($stmt->execute()) {
         return $conn->insert_id;
     } else {
