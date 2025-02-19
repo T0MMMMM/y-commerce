@@ -3,7 +3,10 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-require_once "crud.php";
+require_once "crudArticles.php";
+require_once "crudCommands.php";
+require_once "crudUser.php";
+
 
 function addToCart($product_id) {
     if (isset($_SESSION['cart'][$product_id])) {

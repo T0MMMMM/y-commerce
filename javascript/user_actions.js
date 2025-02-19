@@ -57,3 +57,32 @@ function logout() {
     .catch(error => console.error('Error:', error));
 }
 
+function updatePassword(form) {
+    const formData = new FormData();
+    formData.append('action', 'update_password');
+    formData.append('currentPassword', form.currentPassword.value);
+    formData.append('newPassword', form.newPassword.value);
+
+    fetch('api/user_actions.php', {
+        method: 'POST',
+        body: new URLSearchParams({
+            'action': 'update_password',
+            'currentPassword': form.currentPassword.value,
+            'newPassword': form.newPassword.value
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Mot de passe modifié avec succès');
+            form.reset();
+        } else {
+            alert(data.error || 'Erreur lors de la modification du mot de passe');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Erreur lors de la modification du mot de passe');
+    });
+}
+

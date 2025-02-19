@@ -1,4 +1,7 @@
-<?php require_once 'api/crud.php'; ?>
+<?php 
+require_once "api/crudArticles.php";
+require_once "api/crudCommands.php";
+require_once "api/crudUser.php"; ?>
 <nav class="navbar" id="navbar">
     <a class="brand" href="/y-commerce">y-commerce.</a>
     <form action="/y-commerce" method="get" class="search-bar">
@@ -26,7 +29,13 @@
         <?php endif; ?>
         <a href="cart.php" class="nav-icon">
             <i class="fas fa-shopping-cart"></i>
-            <span class="cart-badge"><?= count($_SESSION["cart"] ?? []) ?></span>
+            <?php
+            $count = 0;
+            foreach ($_SESSION["cart"] ?? [] as $key => $value) {
+                $count += $value["quantity"];
+            }
+            ?>
+            <span class="cart-badge"><?= $count ?></span>
         </a>
     </div>
 </nav>

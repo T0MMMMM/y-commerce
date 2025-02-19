@@ -1,7 +1,8 @@
 <?php
 session_start();
-require_once 'crud.php';
-require_once 'command.php';
+require_once "crudArticles.php";
+require_once "crudCommands.php";
+require_once "crudUser.php";require_once 'command.php';
 
 // Traiter les différentes actions
 switch ($_POST['action']) {
@@ -25,6 +26,19 @@ switch ($_POST['action']) {
         if (!getUserByName($_POST["username"]) > 0) {
             updateUserProfile($_SESSION['user'], $_POST['username']);
             echo json_encode(['success' => true, 'newUsername' => $_POST['username']]);
+        }
+        break;
+
+    case 'update_password':
+        if (!isset($_POST['currentPassword']) || !isset($_POST['newPassword'])) {
+            echo json_encode(['error' => 'Données manquantes']);
+            exit();
+        }
+        
+        if (updateUserPassword($_SESSION['user'], $_POST['currentPassword'], $_POST['newPassword'])) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['error' => 'Mot de passe actuel incorrect']);
         }
         break;
 

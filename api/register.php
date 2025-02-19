@@ -4,7 +4,9 @@ if (!isset($_SESSION)) {
 }
 
 require_once 'config.php';
-require_once 'crud.php';
+require_once "crudArticles.php";
+require_once "crudCommands.php";
+require_once "crudUser.php";
 
 function register($Username, $Password, $role) {
     global $key;
