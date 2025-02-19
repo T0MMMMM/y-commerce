@@ -5,7 +5,6 @@ require_once "crudCommands.php";
 require_once "crudUser.php";
 require_once 'command.php';
 
-// Traiter les différentes actions
 switch ($_POST['action']) {
     case 'update_balance':
         if (!isset($_POST['amount']) || !is_numeric($_POST['amount'])) {
@@ -44,7 +43,7 @@ switch ($_POST['action']) {
             exit();
         }        
         if (updateUserPassword($_SESSION['user'], $_POST['currentPassword'], $_POST['newPassword'])) {
-            echo json_encode(['success' => true]);
+            echo json_encode(['success' => false]);
         } else {
             echo json_encode(['error' => 'Mot de passe actuel incorrect']);
         }
@@ -60,3 +59,4 @@ switch ($_POST['action']) {
         echo json_encode(['error' => 'Invalid action']);
         break;
 }
+exit();

@@ -82,10 +82,11 @@ function updatePassword(currentPassword, newPassword) {
     })
     .then(response => response.json())
     .then(data => {
+        console.log(data);
         if (!data.success) {
             alert("Erreur : " + data.error);
         } else {
-            location.reload();
+            //location.reload();
         }
     })
     .catch(error => {

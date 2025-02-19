@@ -1,4 +1,5 @@
 function addToCart(productId) {
+    console.log('Action: add_to_cart'); // Log action
     fetch('api/cart.php', {
         method: 'POST',
         headers: {
@@ -20,6 +21,7 @@ function addToCart(productId) {
 
 function handleAuth(event, action) {
     event.preventDefault();
+    console.log('Action:', action); // Log action
     const form = event.target;
     const formData = new FormData(form);
     formData.append('action', action);
@@ -42,6 +44,7 @@ function handleAuth(event, action) {
 }
 
 function updateCart(productId, quantityChange) {
+    console.log('Action: update_cart'); // Log action
     fetch('api/cart.php', {
         method: 'POST',
         headers: {
@@ -57,13 +60,13 @@ function updateCart(productId, quantityChange) {
     .then(response => response.text())
     .then(data => {
         console.log(data);
-        // Update the UI
         location.reload();
     })
     .catch(error => console.error('Error:', error));
 }
 
 function removeFromCart(productId) {
+    console.log('Action: remove_from_cart'); // Log action
     fetch('api/cart.php', {
         method: 'POST',
         headers: {
@@ -78,13 +81,13 @@ function removeFromCart(productId) {
     .then(response => response.text())
     .then(data => {
         console.log(data);
-        // Update the UI
         location.reload();
     })
     .catch(error => console.error('Error:', error));
 }
 
 function createCommand() {
+    console.log('Action: create_command'); // Log action
     fetch('api/command.php', {
         method: 'POST',
         headers: {

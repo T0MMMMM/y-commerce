@@ -52,11 +52,15 @@ function getCart() {
     return $cart;
 }
 
-if (isset($_POST['action'])) {
+
+if (basename($_SERVER['PHP_SELF']) == 'cart.php' && isset($_POST['action'])) {
     $product_id = $_POST['product_id'] ?? null;
     $quantity_change = $_POST['quantity_change'] ?? null;
 
-    switch ($_POST['action']) {
+    $action = $_POST['action'] ?? '';
+    error_log("cart.php action: " . $action); // Log action
+
+    switch ($action) {
         case 'add_to_cart':
             addToCart($product_id);
             break;
@@ -73,7 +77,6 @@ if (isset($_POST['action'])) {
             getCart();
             break;
     }
-    echo'{"success": true}';
-    exit();
+    echo json_encode(['success'=> true]);
 }
 ?>
