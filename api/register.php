@@ -11,6 +11,7 @@ require_once "crudUser.php";
 function register($Username, $Password, $role) {
     global $key;
     $response = [];
+    $response['success'] = true;
 
     if (empty($Username) || empty($Password)) {
         $response['success'] = false;
@@ -34,13 +35,13 @@ function register($Username, $Password, $role) {
         $hashedPassword = password_hash($Password, PASSWORD_BCRYPT);
         postUser($Username, $hashedPassword, $role);
         login($Username, $Password);
-        $response['success'] = true;
-        echo json_encode($response);
+        return; 
 
     } else {
         $response['success'] = false;
         $response['error'] = "Username already exists";
         echo json_encode($response);
+        return; 
     }
 }
 

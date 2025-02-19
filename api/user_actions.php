@@ -2,7 +2,8 @@
 session_start();
 require_once "crudArticles.php";
 require_once "crudCommands.php";
-require_once "crudUser.php";require_once 'command.php';
+require_once "crudUser.php";
+require_once 'command.php';
 
 // Traiter les différentes actions
 switch ($_POST['action']) {

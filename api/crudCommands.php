@@ -2,11 +2,6 @@
 
 require_once 'config.php';
 
-
-
-
-
-
 function getCommandsByUserId(int $userId): array {
     global $conn;
     $sql = "SELECT * FROM orders WHERE id_user = ?";  
