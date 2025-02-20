@@ -7,6 +7,9 @@ require_once dirname(__DIR__) . '/utils/utils.php';
 if (!basename($_SERVER['PHP_SELF']) == 'user_actions.php'){
           exit;
 }
+if (!isset($_SESSION)) {
+    session_start();
+}
 
 $jsonData = file_get_contents('php://input');
 $data = json_decode($jsonData, true);

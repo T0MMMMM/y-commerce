@@ -3,7 +3,6 @@
     require_once "api/crud/crud_article.php";
     require_once "api/crud/crud_command.php";
     require_once "api/crud/crud_user.php";
-
     require_once "api/utils/admin_utils.php";
 
 

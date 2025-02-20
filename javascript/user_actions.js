@@ -58,8 +58,8 @@ function logout() {
             'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: new URLSearchParams({
-            'action': 'logout'
+        body: JSON.stringify({
+            action: 'logout'
         })
     })
     .then(response => response.json())

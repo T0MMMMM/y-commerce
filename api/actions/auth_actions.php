@@ -21,6 +21,7 @@ $action = $data["action"] ?? null;
 $username = $data["username"] ?? null;
 $password = $data["password"] ?? null;
 $comfirmPassword = isset($data["confirm_password"]) ?? null;
+$mail = $data["mail"] ?? null;
 $role = json_encode(["role" => ["user"]]);
 
 switch ($action) {
@@ -35,11 +36,13 @@ switch ($action) {
                     $_SESSION["user"] = $user["id"];
 
                     sendSuccess(200, "Login success");
-
                     break;
           case "register":
 
                     checkAuthData($username, $password);
+
+                    if (empty($mail))
+                              sendError(400, "Mail is required");
 
                     confirmPassword($password, $comfirmPassword);
 
@@ -49,18 +52,16 @@ switch ($action) {
 
                     $hashedPassword = password_hash($Password, PASSWORD_BCRYPT);
 
-                    $response = postUser($Username, $hashedPassword, $role);
+                    $response = postUser($username, $mail,$hashedPassword, $role);
 
                     // LOGIN
-
-                    checkAuthData($username, $password);
 
                     checkUser($username, $password);
 
                     $_SESSION["user"] = $user["id"];
 
                     sendSuccess(200, "Login success");
-                    
+                    break;          
           default:
                     sendError(400, 'Invalid action');
                     break;

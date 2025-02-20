@@ -56,10 +56,8 @@ function getUserRoles(int $userId) {
     return ($decoded);
 }
 
-
-function postUser($Username, $Password, $Role) {
+function postUser($Username, $mail, $Password, $Role) {
     global $conn;
-    $mail = "test@gmail.com";
     $sql = "INSERT INTO user (username, mail, password, balance, profil_image, role, wishlist, creation_date, modification_date) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), null)";
     $stmt = $conn->prepare($sql);
     $Balance = 0;

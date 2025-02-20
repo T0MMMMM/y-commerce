@@ -38,8 +38,8 @@
             <form class="auth-form" onsubmit="handleAuth(event, 'register')">
 
                 <div class="form-group">
-                    <label for="fullname">Nom complet</label>
-                    <input type="text" id="fullname" name="fullname" required>
+                    <label for="mail">Mail</label>
+                    <input type="email" id="mail" name="mail" required>
                 </div>
                 <div class="form-group">
                     <label for="reg-email">Username</label>
