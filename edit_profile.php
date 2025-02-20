@@ -1,11 +1,11 @@
 <?php
 session_start();
 require_once 'includes/auth_check.php';
-require_once "api/crudArticles.php";
-require_once "api/crudCommands.php";
-require_once "api/crudUser.php";
-require_once "api/command.php";
-require_once "api/admin.php";
+require_once "api/crud/crud_article.php";
+require_once "api/crud/crud_command.php";
+require_once "api/crud/crud_user.php";
+
+require_once "api/utils/admin_utils.php";
 
 if (!isset($_POST['id'])) {
     header('Location: profile.php');
@@ -15,7 +15,7 @@ if (!isset($_POST['id'])) {
 $targetUser = getUserById($_POST['id']);
 
 // Vérifier que l'utilisateur peut éditer ce profil
-if (!$targetUser || ($targetUser['id'] !== $_SESSION['user'] && !isAdmin())) {
+if (!$targetUser || ($targetUser['id'] !== $_SESSION['user'] && !isAdmin($_SESSION["user"]))) {
     header('Location: profile.php');
     exit();
 }

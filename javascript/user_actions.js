@@ -3,20 +3,21 @@ function updateBalance(id, amount) {
         alert("Erreur : " + "Veuillez rentrer un montant positif");
         return;
     }
-    fetch('api/user_actions.php', {
-        method: 'POST',
+    fetch('api/actions/user_actions.php', {
+        method: 'PUT',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
         },
-        credentials: 'include', // Include cookies in the request
-        body: new URLSearchParams({
-            'amount': parseFloat(amount),
-            'action': 'update_balance',
-            'id' : id
+        credentials: 'include',
+        body: JSON.stringify({
+            id: id,
+            balance_amount: amount,
+            action: 'update_balance'
         })
     })
     .then(response => response.json())
     .then(data => {
+        console.log(data);
         if (!data.success) {
             alert("Erreur : " + data.error);
         } else {
@@ -27,16 +28,16 @@ function updateBalance(id, amount) {
 }
 
 function updateProfile(id, username) {
-    fetch('api/user_actions.php', {
-        method: 'POST',
+    fetch('api/actions/user_actions.php', {
+        method: 'PUT',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
         },
-        credentials: 'include', // Include cookies in the request
-        body: new URLSearchParams({
-            'username': username,
-            'action': 'update_profile',
-            'id' : id
+        credentials: 'include',
+        body: JSON.stringify({
+            id: id,
+            username: username,
+            action: 'update_profile'
         })
     })
     .then(response => response.json())
@@ -51,12 +52,12 @@ function updateProfile(id, username) {
 }
 
 function logout() {
-    fetch('api/user_actions.php', {
+    fetch('api/actions/user_actions.php', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
         },
-        credentials: 'include', // Include cookies in the request
+        credentials: 'include',
         body: new URLSearchParams({
             'action': 'logout'
         })
@@ -69,18 +70,18 @@ function logout() {
     .catch(error => console.error('Error:', error));
 }
 
-function updatePassword(id, currentPassword, newPassword) {
-    fetch('api/user_actions.php', {
-        method: 'POST',
+function updatePassword(id, current_password, new_password) {
+    fetch('api/actions/user_actions.php', {
+        method: 'PUT',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: new URLSearchParams({
-            'action': 'update_password',
-            'currentPassword': currentPassword,
-            'newPassword': newPassword,
-            'id' : id
+        body: JSON.stringify({
+            id: id,
+            currentPassword: current_password,
+            newPassword: new_password,
+            action: 'update_password'
         })
     })
     .then(response => response.json())

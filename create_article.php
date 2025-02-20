@@ -1,11 +1,6 @@
 <?php
 session_start();
 require_once 'includes/auth_check.php';
-require_once "api/crudArticles.php";
-require_once "api/crudCommands.php";
-require_once "api/crudUser.php";
-require_once "api/command.php";
-require_once 'utils/utils.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">

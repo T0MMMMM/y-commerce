@@ -1,10 +1,9 @@
 <?php
 session_start();
 require_once 'includes/auth_check.php';
-require_once "api/crudArticles.php";
-require_once "api/crudCommands.php";
-require_once "api/crudUser.php";
-require_once "api/command.php";
+require_once "api/crud/crud_article.php";
+require_once "api/crud/crud_command.php";
+require_once "api/crud/crud_user.php";
 
 
 if (!isset($_GET['u'])) {

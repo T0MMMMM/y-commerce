@@ -1,6 +1,6 @@
 <?php 
 
-require_once 'config.php';
+require_once dirname(__DIR__) . '/config/config.php';
 
 
 function getArticleById($id) {
@@ -45,14 +45,14 @@ function getArticlesByName($name) {
     return $articles;
 }
 
-function createArticle($data) {
+function postArticle($data) {
     global $conn;
     $sql = "INSERT INTO article (name, slug, description, price, image_link, owner_id, publication_date, modification_date) 
             VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())";
     
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssdsi", 
-        $data['name'],
+         $data['name'],
         $data['slug'],
         $data['description'],
         $data['price'],
@@ -60,14 +60,9 @@ function createArticle($data) {
         $data['owner_id']
     );
     
-    if ($stmt->execute()) {
-        $id = $conn->insert_id;
-        $stmt->close();
-        return $id;
-    }
-    
+    $response = $stmt->execute();
     $stmt->close();
-    return false;
+    return $response;
 }
 
 function getUserArticles($userId) {
@@ -84,7 +79,7 @@ function getUserArticles($userId) {
     return $result->fetch_all(MYSQLI_ASSOC);
 }
 
-function updateArticle($data) {
+function putArticle($data) {
     global $conn;
     $sql = "UPDATE article SET 
             name = ?, 
@@ -109,7 +104,7 @@ function updateArticle($data) {
     return $result;
 }
 
-function deleteArticle($articleId) {
+function removeArticle($articleId) {
     global $conn;
     $sql = "DELETE FROM article WHERE id = ?";
     $stmt = $conn->prepare($sql);
@@ -119,7 +114,7 @@ function deleteArticle($articleId) {
     return $result;
 }
 
-function deleteUserArticles($userId) {
+function removeUserArticles($userId) {
     global $conn;
     $sql = "DELETE FROM article WHERE owner_id = ?";
     $stmt = $conn->prepare($sql);
@@ -128,5 +123,30 @@ function deleteUserArticles($userId) {
     $stmt->close();
     return $result;
 }
+
+// $jsonData = file_get_contents('php://input');
+// $data = json_decode($jsonData, true);
+
+// switch ($_SERVER['REQUEST_METHOD']) {
+//     case 'GET':
+//         echo getAllArticles();
+//         break;
+//     case 'POST':
+//         echo postArticle($data);
+//         break;
+//     case 'PUT':
+//         echo putArticle($data);
+//         break;
+//     case 'DELETE':
+//         echo removeArticle($data['id']);
+//         break;  
+//     default:
+//         http_response_code(400);
+//         echo json_encode([
+//                 "status" => "error",
+//                 "error" => "Invalid Request",
+//         ]);
+//         break;
+// }
 
 ?>

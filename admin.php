@@ -1,12 +1,13 @@
 <?php
 session_start();
 require_once 'includes/auth_check.php';
-require_once "api/crudArticles.php";
-require_once "api/crudUser.php";
-require_once "api/admin.php";
+require_once 'api/crud/crud_article.php';
+require_once 'api/crud/crud_user.php';
+
+require_once 'api/utils/admin_utils.php';
 
 // Vérifier si l'utilisateur est admin
-if (!isAdmin()) {
+if (!isAdmin($_SESSION["user"])) {
     header('Location: index.php');
     exit();
 }
@@ -42,9 +43,10 @@ $users = getAllUsers();
                         <p>Prix: <?= htmlspecialchars($article['price']) ?> €</p>
                     </div>
                     <div class="admin-item-actions">
-                        <a href="edit_article.php?id=<?= $article['id'] ?>" class="admin-btn edit-btn">
+                        <form action="edit_article.php" method="post" onclick="this.submit()" class="admin-btn edit-btn">
+                            <input type="hidden" name="id" value="<?= $article['id'] ?>">
                             <i class="fas fa-edit"></i> Modifier
-                        </a>
+                        </form>
                         <button class="admin-btn delete-btn" onclick="deleteArticle(<?= $article['id'] ?>)">
                             <i class="fas fa-trash"></i> Supprimer
                         </button>

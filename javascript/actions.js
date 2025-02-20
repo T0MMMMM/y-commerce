@@ -1,14 +1,13 @@
-function addToCart(productId) {
-    console.log('Action: add_to_cart'); // Log action
-    fetch('api/cart.php', {
+function addToCart(product_id) {
+    fetch('api/actions/cart_actions.php', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
         },
-        credentials: 'include', // Include cookies in the request
-        body: new URLSearchParams({
-            'product_id': productId,
-            'action': 'add_to_cart'
+        credentials: 'include',
+        body: JSON.stringify({
+            product_id: product_id,
+            action: 'add_to_cart'
         })
     })
     .then(response => response.json())
@@ -18,18 +17,24 @@ function addToCart(productId) {
     })
     .catch(error => console.error('Error:', error));
 }
-
 function handleAuth(event, action) {
     event.preventDefault();
-    console.log('Action:', action); // Log action
     const form = event.target;
     const formData = new FormData(form);
-    formData.append('action', action);
+    const jsonObject = {};
 
-    fetch('api/register.php', {
+    formData.forEach((value, key) => {
+        jsonObject[key] = value;
+    });
+    jsonObject['action'] = action;
+
+    fetch('api/actions/auth_actions.php', {
         method: 'POST',
-        credentials: 'include', // Include cookies in the request
-        body: formData
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(jsonObject)
     })
     .then(response => response.json())
     .then(data => {
@@ -43,21 +48,20 @@ function handleAuth(event, action) {
     .catch(error => console.error('Error:', error));
 }
 
-function updateCart(productId, quantityChange) {
-    console.log('Action: update_cart'); // Log action
-    fetch('api/cart.php', {
+function updateCart(product_id, quantity_change) {
+    fetch('api/actions/cart_actions.php', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
         },
-        credentials: 'include', // Include cookies in the request
-        body: new URLSearchParams({
-            'product_id': productId,
-            'quantity_change': quantityChange,
-            'action': 'update_cart'
+        credentials: 'include',
+        body: JSON.stringify({
+            product_id: product_id,
+            quantity_change: quantity_change,
+            action: 'update_cart'
         })
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
         console.log(data);
         location.reload();
@@ -65,20 +69,19 @@ function updateCart(productId, quantityChange) {
     .catch(error => console.error('Error:', error));
 }
 
-function removeFromCart(productId) {
-    console.log('Action: remove_from_cart'); // Log action
-    fetch('api/cart.php', {
+function removeFromCart(product_id) {
+    fetch('api/actions/cart_actions.php', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
         },
-        credentials: 'include', // Include cookies in the request
-        body: new URLSearchParams({
-            'product_id': productId,
-            'action': 'remove_from_cart'
+        credentials: 'include',
+        body: JSON.stringify({
+            product_id: product_id,
+            action: 'remove_from_cart'
         })
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
         console.log(data);
         location.reload();
@@ -87,21 +90,21 @@ function removeFromCart(productId) {
 }
 
 function createCommand() {
-    console.log('Action: create_command'); // Log action
-    fetch('api/command.php', {
+    fetch('api/actions/command_actions.php', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
         },
-        credentials: 'include', // Include cookies in the request
-        body: new URLSearchParams({
-            'action': "create_command"
+        credentials: 'include',
+        body: JSON.stringify({
+            action: 'create_command'
         })
     })
     .then(response => response.json())
     .then(data => {
+        console.log(data);
         if (!data.success) {
-            alert("Erreur : " + data.error);
+            alert("Erreurs : " + data.error);
         } else {
             location.reload();;
         };        

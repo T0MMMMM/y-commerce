@@ -1,8 +1,10 @@
 <?php
 session_start();
-require_once "api/crudArticles.php";
-require_once "api/crudCommands.php";
-require_once "api/crudUser.php";
+require_once "api/crud/crud_article.php";
+require_once "api/crud/crud_command.php";
+require_once "api/crud/crud_user.php";
+
+require_once "api/utils/admin_utils.php";
 
 require_once 'utils/utils.php';
 
@@ -64,7 +66,7 @@ if ($article['slug'] !== $_GET['slug'] || $article["id"] !== (int) $_GET['id']) 
                             style="<?= !isset($_SESSION['user']) || $_SESSION['user'] !== $article['owner_id'] ? 'width: 100%;' : '' ?>">
                         <i class="fas fa-heart"></i> Ajouter aux favoris
                     </button>
-                    <?php if (isset($_SESSION['user']) && ($_SESSION['user'] === $article['owner_id'] || isAdmin())): ?>
+                    <?php if (isset($_SESSION['user']) && ($_SESSION['user'] === $article['owner_id'] || isAdmin($_SESSION["user"]))): ?>
                         <form action="edit_article.php" method="post" class="edit-article-btn" onclick="this.submit()">
                             <input type="hidden" name="id" value="<?= $article['id'] ?>">
                             <i class="fas fa-edit"></i> Modifier

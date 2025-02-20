@@ -1,6 +1,6 @@
 <?php 
 
-require_once 'config.php';
+require_once dirname(__DIR__) . '/config/config.php';
 
 function getCommandsByUserId(int $userId): array {
     global $conn;
@@ -30,7 +30,7 @@ function createOrderDetails(int $ArticleId, int $Quantity): int {
     return $insertedId;
 }
 
-function createOrder(int $userId, int $totalAmount, array $articlesList): int {
+function createOrder(int $userId, int $totalAmount, array $articlesList): array {
     global $conn;
     $sql = "INSERT INTO `order` (user_id, transaction_date, total_price, article_list, adress) 
         VALUES (?, NOW(), ?, ?, ?)";
@@ -39,15 +39,10 @@ function createOrder(int $userId, int $totalAmount, array $articlesList): int {
     $city = "Montpellier";
     $stmt->bind_param( "iiss", $userId, $totalAmount,  $value, $city);
     
-
-    if (!$stmt->execute()) {
-        echo ("Erreur d'exécution SQL: " . $stmt->error);
-        $stmt->close();
-        return -1;
-    }
+    $reponse = $stmt->execute();
     $insertedId = $conn->insert_id; 
     $stmt->close();
-    return $insertedId;
+    return [$reponse, $insertedId];
 }
 
 

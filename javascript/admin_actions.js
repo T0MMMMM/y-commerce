@@ -1,36 +1,38 @@
-function deleteArticle(articleId) {
+function deleteArticle(article_id) {
     if (confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
 
-        fetch('api/delete_article.php', {
+        fetch('api/actions/admin_actions.php', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/json',
             },
-            body: new URLSearchParams({
-                    'id': articleId
-          })
+            body: JSON.stringify({
+                article_id: article_id,
+                action: 'delete_article'
+            })
         })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
                 location.reload();
             } else {
-                alert('Erreur lors de la suppression de l\'article');
+                alert("Erreur lors de la suppression de l'article");
             }
         });
     }
 }
 
-function deleteUser(userId) {
+function deleteUser(user_id) {
     if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
 
-        fetch('api/delete_user.php', {
+        fetch('api/actions/admin_actions.php', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/json',
             },
-            body: new URLSearchParams({
-                    'id': userId
+            body: JSON.stringify({
+                    user_id: user_id,
+                    action: 'delete_user'
           })
         })
         .then(response => response.json())
@@ -38,7 +40,7 @@ function deleteUser(userId) {
             if (data.success) {
                 location.reload();
             } else {
-                alert('Erreur lors de la suppression de l\'utilisateur');
+                alert("Erreur lors de la suppression de l'utilisateur");
             }
         });
     }

@@ -1,12 +1,13 @@
 <?php
 session_start();
 require_once 'includes/auth_check.php';
-require_once "api/crudArticles.php";
-require_once "api/crudCommands.php";
-require_once "api/crudUser.php";
-require_once "api/command.php";
-require_once 'utils/utils.php';
-require_once "api/admin.php";
+require_once "api/crud/crud_article.php";
+require_once "api/crud/crud_command.php";
+require_once "api/crud/crud_user.php";
+require_once "api/utils/admin_utils.php";
+
+require_once "api/utils/admin_utils.php";
+
 
 if (!isset($_POST['id'])) {
     header('Location: index.php');
@@ -15,7 +16,7 @@ if (!isset($_POST['id'])) {
 
 $article = getArticleById($_POST['id']);
 
-if (!$article || $article['owner_id'] !== $_SESSION['user'] && !isAdmin()) {
+if (!$article || $article['owner_id'] !== $_SESSION['user'] && !isAdmin($_SESSION["user"])) {
     header('Location: index.php');
     exit();
 }

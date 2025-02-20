@@ -1,6 +1,12 @@
 <?php 
     session_start();
-    require_once "utils/utils.php";
+    require_once "api/crud/crud_article.php";
+    require_once "api/crud/crud_command.php";
+    require_once "api/crud/crud_user.php";
+
+    require_once "api/utils/admin_utils.php";
+
+
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = [];
     }
@@ -25,7 +31,6 @@
         <!-- Products section -->
         <div class="products">
             <?php
-            require_once "api/admin.php";
 
             
             if (isset($_GET["search-bar"])) {

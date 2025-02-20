@@ -1,27 +1,22 @@
 function createArticle(form) {
-    fetch('api/article_actions.php', {
+    fetch('api/actions/article_actions.php', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: new URLSearchParams({
-            'action': 'create',
-            'name': form.name.value,
-            'description': form.description.value,
-            'price': form.price.value,
-            'image_link': form.image_link.value
+        body: JSON.stringify({
+            action: 'create_article',
+            name: form.name.value,
+            description: form.description.value,
+            price: form.price.value,
+            image_link: form.image_link.value
         })
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
         console.log(data);
-        const response = JSON.parse(data);
-        if (response.success) {
-            window.location.href = `article.php?id=${response.id}&slug=${response.slug}`;
-        } else {
-            alert(response.error || 'Erreur lors de la création de l\'article');
-        }
+        window.location.href = 'index.php';
     })
     .catch(error => {
         console.error('Error:', error);
@@ -29,31 +24,26 @@ function createArticle(form) {
     });
 }
 
-function updateArticle(form, articleId) {
-    fetch('api/article_actions.php', {
+function updateArticle(form, article_id) {
+    fetch('api/actions/article_actions.php', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: new URLSearchParams({
-            'action': 'update',
-            'id': articleId,
-            'name': form.name.value,
-            'description': form.description.value,
-            'price': form.price.value,
-            'image_link': form.image_link.value
+        body: JSON.stringify({
+            action: 'update_article',
+            id: article_id,
+            name: form.name.value,
+            description: form.description.value,
+            price: form.price.value,
+            image_link: form.image_link.value
         })
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
         console.log(data);
-        const response = JSON.parse(data);
-        if (response.success) {
-            window.location.href = `article.php?id=${articleId}&slug=${response.slug}`;
-        } else {
-            alert(response.error || 'Erreur lors de la modification de l\'article');
-        }
+        window.location.href = 'index.php';
     })
     .catch(error => {
         console.error('Error:', error);

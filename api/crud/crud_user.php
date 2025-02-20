@@ -1,7 +1,5 @@
 <?php
-
-
-
+require_once dirname(__DIR__) . '/config/config.php';
 
 function getAllUsers() {
     global $conn;
@@ -29,11 +27,11 @@ function getUserById($id) {
     return $user;
 }
 
-function getUserByName($name) {
+function getUserByName($username) {
     global $conn;
     $sql = "SELECT * FROM user WHERE username = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $name);
+    $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
@@ -57,11 +55,6 @@ function getUserRoles(int $userId) {
     $decoded = json_decode($roles[0]["role"], true);
     return ($decoded);
 }
-
-// // Une fois l'utilisateur authentifié :
-// $userId = $_SESSION['user_id']; // ID de l'utilisateur après connexion
-// $userRoles = getUserRoles($userId, $pdo);
-
 
 
 function postUser($Username, $Password, $Role) {
@@ -87,8 +80,9 @@ function updateUserProfile($userId, $username) {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("si", $username, $userId);
     updateUserModificationDate($userId);
-    $stmt->execute();
+    $response = $stmt->execute();
     $stmt->close();
+    return $response;
 }
 
 
@@ -97,8 +91,9 @@ function updateUserBalance(int $id, $value) {
     $sql = "UPDATE user SET balance = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ii", $value, $id);
-    $stmt->execute();
+    $response = $stmt->execute();
     $stmt->close();
+    return $response;
 }
 
 function updateUserModificationDate(int $id) {
@@ -132,14 +127,5 @@ function deleteUser($userId) {
     $stmt->close();
     return $result;
 }
-
-$jsonData = json_encode([
-    "wishlist" => ["movies", "sports"]
-]);
-$role = json_encode([
-    "role" => ["user"]
-]);
-
-
 
 ?>

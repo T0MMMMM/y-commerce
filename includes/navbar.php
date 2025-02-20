@@ -1,8 +1,9 @@
 <?php 
-require_once "api/crudArticles.php";
-require_once "api/crudCommands.php";
-require_once "api/crudUser.php";
-require_once "api/admin.php"; ?>
+require_once 'api/crud/crud_article.php';
+require_once 'api/crud/crud_user.php';
+
+require_once 'api/utils/admin_utils.php';
+?>
 
 <nav class="navbar" id="navbar">
     <a class="brand" href="/y-commerce">y-commerce.</a>
@@ -29,7 +30,7 @@ require_once "api/admin.php"; ?>
             <a href="create_article.php" class="nav-icon" title="Créer un article">
                 <i class="fas fa-plus"></i>
             </a>
-            <?php if (isAdmin()): ?>
+            <?php if (isAdmin($_SESSION["user"])): ?>
                 <a href="admin.php" class="nav-icon" title="Administration">
                     <i class="fas fa-cog"></i>
                 </a>
