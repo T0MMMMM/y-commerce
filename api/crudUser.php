@@ -63,7 +63,6 @@ function getUserRoles(int $userId) {
 // $userRoles = getUserRoles($userId, $pdo);
 
 
-
 function postUser($Username, $mail, $Password, $Role) {
     global $conn;
     $sql = "INSERT INTO user (username, mail, password, balance, profil_image, role, wishlist, creation_date, modification_date) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), null)";

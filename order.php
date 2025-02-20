@@ -63,8 +63,10 @@ $orders = getAllCommandsByUserId($user['id']);
                                         <span class="cmd-product-total"><?= htmlspecialchars($article['price'] * $orderdetails['quantity']) ?> €</span>
                                     </div>
                                 </div>
+                                
                             </div>
                         <?php endforeach; ?>
+                            <button>Télécharger la Facture </button>
                     </div>
                 </div>
                 <?php endforeach; ?>
