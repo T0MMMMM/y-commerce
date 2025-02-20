@@ -1,13 +1,11 @@
 <?php
 
-require_once 'config.php';
-require_once 'admin.php';
-require_once 'crudUser.php';
-require_once 'crudArticles.php';
-require_once 'crudCommands.php';
-
-require_once 'vendor\autoload.php';
-use Fpdf\Fpdf; // Assure-toi d'importer FPDF, pas FPDI
+require_once dirname(__DIR__) . "/utils/admin_utils.php";
+require_once dirname(__DIR__) . '/crud/crud_article.php';
+require_once dirname(__DIR__) . '/crud/crud_user.php';
+require_once dirname(__DIR__) . '/crud/crud_command.php';
+require_once dirname(__DIR__) . '/utils/utils.php';
+require_once dirname(__DIR__) . '/../librairies/fdpf/fpdf.php';
 
 // Classe pour générer la facture
 
@@ -90,6 +88,6 @@ function createPDF($command) {
     exit;
 }
 
-
+generatePDF(39);
 
 ?>
