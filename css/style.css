@@ -1241,6 +1241,17 @@ body {
     background-color: #666;
 }
 
+.show-commands {
+    background-color: #6e41d6;
+    color: white;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.show-commands:hover {
+    background-color: #6b30bc;
+}
+
 /* User Articles Styles */
 .user-articles {
     margin-top: 40px;
@@ -1485,3 +1496,239 @@ body {
 .delete-btn:hover {
     background-color: #c82333;
 }
+
+/* Commandes - CSS isolé avec préfixe cmd- */
+/* Ajoutez ce bloc à la fin de votre fichier CSS existant */
+
+/* Dashboard Layout */
+.cmd-dashboard-wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1.5rem;
+  }
+
+  .cmd-spacer {
+    height: 2.75rem; /* Hauteur approximative d'un h1 + padding */
+    visibility: hidden;
+  }
+  
+  .cmd-dashboard-header {
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .cmd-dashboard-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #343a40;
+  }
+  
+  /* Orders Panel */
+  .cmd-orders-panel {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
+  
+  .cmd-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .cmd-panel-header h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #343a40;
+    margin: 0;
+  }
+  
+  .cmd-order-count {
+    font-size: 0.875rem;
+    color: #6c757d;
+    background-color: #e9ecef;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+  }
+  
+  /* Orders Grid */
+  .cmd-orders-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  /* Order Box */
+  .cmd-order-box {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.25s ease;
+  }
+  
+  .cmd-order-box:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
+  
+  .cmd-order-header {
+    background-color: #f8fafd;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .cmd-order-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .cmd-meta-item {
+    font-size: 0.875rem;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+  
+  .cmd-meta-item i {
+    color: #4a6cf7;
+    font-size: 0.75rem;
+  }
+  
+  .cmd-order-address {
+    font-size: 0.875rem;
+    color: #343a40;
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+  
+  .cmd-order-address i {
+    color: #4a6cf7;
+    font-size: 0.75rem;
+  }
+  
+  /* Products List */
+  .cmd-products-list {
+    padding: 1rem;
+    display: grid;
+    gap: 0.875rem;
+  }
+  
+  /* Product Card */
+  .cmd-product-card {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: #fbfbfd;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+  }
+  
+  .cmd-product-card:hover {
+    background-color: #f5f7ff;
+  }
+  
+  .cmd-product-thumb {
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    overflow: hidden;
+    flex-shrink: 0;
+    margin-right: 1rem;
+    border: 1px solid #dee2e6;
+  }
+  
+  .cmd-product-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .cmd-product-info {
+    flex: 1;
+  }
+  
+  .cmd-product-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #343a40;
+  }
+  
+  .cmd-product-details {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.875rem;
+  }
+  
+  .cmd-product-price {
+    color: #6c757d;
+  }
+  
+  .cmd-product-quantity {
+    font-weight: 600;
+    color: #4a6cf7;
+    padding: 0.125rem 0.5rem;
+    background-color: rgba(74, 108, 247, 0.1);
+    border-radius: 4px;
+  }
+  
+  .cmd-product-total {
+    margin-left: auto;
+    font-weight: 600;
+    color: #343a40;
+  }
+  
+  /* Responsive */
+  @media (min-width: 768px) {
+    .cmd-orders-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .cmd-dashboard-header h1 {
+      font-size: 2rem;
+    }
+    
+    .cmd-panel-header h2 {
+      font-size: 1.5rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .cmd-product-card {
+      padding: 1rem;
+    }
+    
+    .cmd-product-thumb {
+      width: 75px;
+      height: 75px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .cmd-order-meta {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .cmd-product-details {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    
+    .cmd-product-total {
+      margin-left: 0;
+      width: 100%;
+      padding-top: 0.5rem;
+      border-top: 1px dashed #dee2e6;
+    }
+  }

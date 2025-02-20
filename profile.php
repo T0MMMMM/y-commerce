@@ -47,12 +47,20 @@ $user = getUserById($_SESSION['user']);
                 </div>
             </div>
 
+            <form action="order.php" method="post" class="profile-actions">
+                <button type="submit" class="user-action-btn show-commands">
+                    Vos Commandes
+                </button>
+            </form>
+
             <form action="edit_profile.php" method="post" class="profile-actions">
                 <input type="hidden" name="id" value="<?= $user['id'] ?>">
                 <button type="submit" class="user-action-btn update-profile-btn">
                     Modifier le profil
                 </button>
             </form>
+
+            
 
             <div class="balance-section">
                 <button type="button" onclick="logout()" class="user-action-btn logout-btn">
