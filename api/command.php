@@ -4,38 +4,46 @@ require_once 'cart.php';
 
 function command() {
     $total = 0;
+    $response = [];
+    $response['success'] = false;
     $cart = getCart();
-    echo'rwvgubjn';
-    foreach ($cart as $article):
+    foreach ($cart as $article) {
         $total += $article["price"]*$_SESSION["cart"][$article["id"]]["quantity"];
-    endforeach;
+    }
     $user = getUserById($_SESSION["user"]);
+    if ($total == 0) {
+        $response['error'] = "Votre Panier est vide";
+        echo json_encode($response);
+        exit();
+    }
     if ($total > $user["balance"]) {
-        echo "Solde insuffisant";
-        return;
+        $response['error'] = "Solde insuffisant";
+        echo json_encode($response);
+        exit();
     } else {
         createCommand($total);
         updateBalance($_SESSION["user"], -$total);
         clearCart();
     }
+    $response['success'] = true;
+    echo json_encode($response);
+    exit();
 }
 
 function createCommand($total) {
     $cart = getCart();
     $array = createDetailsCommand($cart);
-    var_dump($array);
     $userId = $_SESSION["user"];
     $commandid = createOrder($userId,$total, $array);
 }
 
 function createDetailsCommand($articles): array {
     $array = [];
-    foreach ($articles as $article):
+    foreach ($articles as $article) {
         $articleid = (int) $article["id"];
         $quantity = (int) $_SESSION["cart"][$article["id"]]["quantity"];
-        echo $_SESSION["cart"][$article["id"]]["quantity"];
         array_push($array, createOrderDetails($articleid, $quantity));
-    endforeach;
+    }
     return $array;
 }
 

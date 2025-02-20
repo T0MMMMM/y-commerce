@@ -13,7 +13,7 @@ Ce projet consiste à créer un site e-commerce complet en utilisant PHP. Voici 
 - [x] La page Product est accessible en méthode GET avec paramètres.
 - [x] L'utilisateur peut ajouter un article dans son panier.
 - [x] La page Panier comporte tous les articles dans le panier, la possibilité de passer commande en fonction du solde de l'utilisateur, gérer le nombre d'articles et le CRUD.
-- [ ] Seul l'utilisateur qui a créé un article ou un administrateur a la capacité de modifier des informations protégées (article / profil).
+- [x] Seul l'utilisateur qui a créé un article ou un administrateur a la capacité de modifier des informations protégées (article / profil).
 - [x] L'utilisateur peut voir les articles qu'il a mis en vente et les informations de son compte.
 - [x] Le CRUD sur les articles est complet et fonctionnel.
 - [x] Possibilité d'ajouter de l'argent à son solde.
@@ -23,7 +23,7 @@ Ce projet consiste à créer un site e-commerce complet en utilisant PHP. Voici 
 - [x] L’utilisateur peut modifier ses informations personnelles.
 - [x] Le site comprend au moins 1 administrateur.
 - [x] Bonne gestion des rôles.
-- [ ] L’administrateur possède un panel admin qui lui permet de modifier tous les utilisateurs et tous les articles.
+- [x] L’administrateur possède un panel admin qui lui permet de modifier tous les utilisateurs et tous les articles.
 
 ## Installation
 

@@ -37,7 +37,6 @@ function createOrder(int $userId, int $totalAmount, array $articlesList): int {
     $stmt = $conn->prepare($sql);
     $value = json_encode($articlesList);
     $city = "Montpellier";
-    var_dump($city);
     $stmt->bind_param( "iiss", $userId, $totalAmount,  $value, $city);
     
 

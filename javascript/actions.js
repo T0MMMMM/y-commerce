@@ -98,10 +98,13 @@ function createCommand() {
             'action': "create_command"
         })
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
-        console.log(data);
-        //location.reload();
+        if (!data.success) {
+            alert("Erreur : " + data.error);
+        } else {
+            location.reload();;
+        };        
     })
     .catch(error => console.error('Error:', error));
 }

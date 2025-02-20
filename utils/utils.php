@@ -9,4 +9,5 @@ function createSlug($text) {
           return $text;
 }
 
+
 ?>
