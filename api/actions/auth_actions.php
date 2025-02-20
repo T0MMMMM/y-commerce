@@ -26,7 +26,6 @@ $role = json_encode(["role" => ["user"]]);
 
 switch ($action) {
           case 'login':
-
                     $user = getUserByName($username);
 
                     checkAuthData($username, $password);
@@ -42,7 +41,7 @@ switch ($action) {
                     checkAuthData($username, $password);
 
                     if (empty($mail))
-                              sendError(400, "Mail is required");
+                              sendError(200, "Mail is required");
 
                     confirmPassword($password, $comfirmPassword);
 
@@ -50,20 +49,19 @@ switch ($action) {
 
                     existUsername($username);
 
-                    $hashedPassword = password_hash($Password, PASSWORD_BCRYPT);
+                    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-                    $response = postUser($username, $mail,$hashedPassword, $role);
+                    postUser($username, $mail,$password, $role);
 
                     // LOGIN
-
-                    checkUser($username, $password);
+                    $user = getUserByName($username);
 
                     $_SESSION["user"] = $user["id"];
 
                     sendSuccess(200, "Login success");
                     break;          
           default:
-                    sendError(400, 'Invalid action');
+                    sendError(200, 'Invalid action');
                     break;
 }
 exit;

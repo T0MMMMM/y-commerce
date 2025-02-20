@@ -15,18 +15,18 @@ function isLogin() {
 
 function checkArticleData($article_data) {
           if (is_null($article_data))
-                    sendError(400, 'Article data required');
+                    sendError(200, 'Article data required');
 
           if (is_null($article_data['name'])|| is_null($article_data['slug']) || is_null($article_data['description']) || is_null($article_data['price']) || is_null($article_data['image_link'])) 
-                    sendError(400, 'Invalid article data');
+                    sendError(200, 'Invalid article data');
 }
 
 function checkArticle($article) {
           if (is_null($article)) 
-                    sendError(400, 'Article not found');
+                    sendError(200, 'Article not found');
 
           if ($article['owner_id'] !== $_SESSION['user'] && !isAdmin($_SESSION['user']))
-                    sendError(400, 'Unauthorized');
+                    sendError(200, 'Unauthorized');
 }
 
 ?>

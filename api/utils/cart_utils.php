@@ -17,7 +17,7 @@ function removeFromCart($product_id) {
     if (isset($_SESSION['cart'][$product_id])) 
         unset($_SESSION['cart'][$product_id]);
     else
-        sendError(400, "Article not found in cart");
+        sendError(200, "Article not found in cart");
 }
       
 function updateCart($product_id, $quantity_change) {
@@ -28,7 +28,7 @@ function updateCart($product_id, $quantity_change) {
         if ($_SESSION['cart'][$product_id]['quantity'] <= 0) 
             removeFromCart($product_id);
     } else
-        sendError(400, "Article not found in cart");
+        sendError(200, "Article not found in cart");
           
 }
       

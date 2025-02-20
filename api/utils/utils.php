@@ -3,13 +3,14 @@ require_once dirname(__DIR__) . "/utils/utils.php";
 require_once dirname(__DIR__) . "/crud/crud_article.php";
 
 function sendError($code, $message) {
-        header('Content-Type: application/json');
-          http_response_code($code);
-          echo json_encode([
-              "success" => false,
-              "error" => $message
-          ]);
-          exit;
+    header('Content-Type: application/json');
+    http_response_code($code);
+    echo json_encode([
+        "success" => false,
+        "message" => $message,
+        "error"=> $message
+    ]);
+    exit;
 }
 
 function sendSuccess($code, $message) {

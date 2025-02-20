@@ -17,12 +17,12 @@ function getTotal($cart) {
 
 function checkCart($total) {
           if ($total == 0) 
-                    sendError(400, "Empty Cart");
+                    sendError(200, "Empty Cart");
 }
 
 function checkBalance($total, $user) {
           if ($total > $user["balance"])
-                    sendError(400, "Insufficient balance");
+                    sendError(200, "Insufficient balance");
 }
 
 function createCommand($cart, $total) {

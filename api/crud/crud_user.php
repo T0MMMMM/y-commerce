@@ -64,11 +64,7 @@ function postUser($Username, $mail, $Password, $Role) {
     $Avatar = "";
     $Wishlist = json_encode(["wishlist" => []]);
     $stmt->bind_param("sssisss",$Username, $mail, $Password, $Balance, $Avatar, $Role, $Wishlist);
-    if ($stmt->execute()) {
-        return $conn->insert_id;
-    } else {
-        echo "failed to create user: " . $stmt->error;
-    }
+    $stmt->execute();
     $stmt->close();
 }
 

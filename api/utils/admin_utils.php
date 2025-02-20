@@ -15,12 +15,12 @@ function isAdmin(int $id) {
 
 function checkId($id) {
     if (empty($id)) 
-        sendError(400, 'ID required');
+        sendError(200, 'ID required');
 }
 
 function checkSelfDelete($id) {
           if ($id == $_SESSION['user']) {
-                    sendError(400,'Cannot delete yourself');
+                sendError(200,'Cannot delete yourself');
           }
 }
 
