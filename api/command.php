@@ -58,4 +58,6 @@ if (isset($_POST["action"]) && $_POST["action"] == "create_command") {
 }
 
 
+//showCommand(11);
+
 ?>

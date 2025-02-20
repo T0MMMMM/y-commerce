@@ -18,6 +18,51 @@ function getCommandsByUserId(int $userId): array {
     return $commands;
 }
 
+function getOrderById(int $idCommand) {
+    global $conn;
+    $sql = "SELECT * FROM `order` WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $idCommand);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $order = $result->fetch_assoc();
+    $stmt->close();
+    return $order;
+}
+
+function getOrderDetailsById(int $idCommand) {
+    global $conn;
+    $sql = "SELECT * FROM `order_details` WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $idCommand);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $order = $result->fetch_assoc();
+    $stmt->close();
+    return $order;
+}
+
+function getAllCommandsByUserId($userId) {
+    global $conn;
+    $sql = "SELECT * FROM `order` WHERE user_id = ?";
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("Erreur de préparation : " . $conn->error);
+    }
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $orders = [];
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $row["article_list"] = json_decode($row["article_list"], true);
+            $orders[] = $row;
+        }
+    }
+    $stmt->close();
+    return $orders;
+}
+
 
 function createOrderDetails(int $ArticleId, int $Quantity): int {
     global $conn;
