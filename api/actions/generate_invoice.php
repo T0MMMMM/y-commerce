@@ -8,7 +8,7 @@ require_once dirname(__DIR__) . '/utils/utils.php';
 require_once dirname(__DIR__) . '/../librairies/fdpf/fpdf.php';
 
 if (!isset($_POST['id'])) {
-    header('Location: index.php');
+    header('Location: http://localhost/y-commerce');
     exit();
 }
 
