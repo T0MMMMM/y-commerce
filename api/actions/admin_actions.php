@@ -32,9 +32,11 @@ switch ($action) {
 
                     $response = removeArticle($article_id);
 
-                    if ($response) 
+                    if ($response) {
+                              if (isset($_SESSION["cart"][$article_id])) 
+                                        unset($_SESSION["cart"][$article_id]);
                               sendSuccess(200, "Article removed");
-                    else 
+                    }else 
                               sendError(400, "Error removing article");
                     break;
 
@@ -52,7 +54,8 @@ switch ($action) {
                     $response = deleteUser($user_id);
 
                     if ($response){
-                            session_destroy();
+                              if ($_SESSION["user"] == $user_id)
+                                        session_destroy();
                             sendSuccess(200, "User removed");
                     }else
                               sendError(400, "Error removing user");

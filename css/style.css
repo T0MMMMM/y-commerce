@@ -727,6 +727,10 @@ body {
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
+.form-group input[type="checkbox"] {
+    width: auto;
+}
+
 .form-group input:focus {
     border-color: #777;
     box-shadow: 0 0 0 2px rgba(119, 119, 119, 0.1);
@@ -1879,6 +1883,33 @@ body {
     .order-review {
         order: 2;
     }
+}
+
+.danger-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.danger-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+}
+
+.danger-btn i {
+    font-size: 18px;
 }
 
 .danger-btn {

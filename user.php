@@ -51,7 +51,7 @@ if (!$user) {
                 <div class="articles-grid">
                     <?php foreach ($userArticles as $article): ?>
                         <div class="product-card" onclick="window.location.href='article.php?id=<?= $article['id'] ?>&slug=<?= $article['slug'] ?>'">
-                            <img src="images/test_image.jpg" alt="<?= htmlspecialchars($article['name']) ?>" class="product-image">
+                            <img src="<?= htmlspecialchars($article['image_link']) ?>" alt="<?= htmlspecialchars($article['name']) ?>" class="product-image">
                             <div class="product-info">
                                 <h3 class="product-name"><?= htmlspecialchars($article['name']) ?></h3>
                                 <p class="product-price"><?= htmlspecialchars($article['price']) ?> €</p>
