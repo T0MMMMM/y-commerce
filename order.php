@@ -66,7 +66,10 @@ $orders = getAllCommandsByUserId($user['id']);
                                 
                             </div>
                         <?php endforeach; ?>
-                            <button>Télécharger la Facture </button>
+                            <form action="api/actions/generate_invoice.php" method="post" class="edit-article-btn" onclick="this.submit()">
+                                <input type="hidden" name="id" value="<?= $order['id'] ?>">
+                                <i class="fas fa-edit"></i> Télécharger la Facture 
+                            </form>
                     </div>
                 </div>
                 <?php endforeach; ?>

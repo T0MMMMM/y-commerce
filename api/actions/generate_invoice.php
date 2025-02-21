@@ -7,6 +7,11 @@ require_once dirname(__DIR__) . '/crud/crud_command.php';
 require_once dirname(__DIR__) . '/utils/utils.php';
 require_once dirname(__DIR__) . '/../librairies/fdpf/fpdf.php';
 
+if (!isset($_POST['id'])) {
+    header('Location: index.php');
+    exit();
+}
+
 // Classe pour générer la facture
 
 class PDF extends Fpdf {
@@ -88,6 +93,6 @@ function createPDF($command) {
     exit;
 }
 
-generatePDF(39);
+generatePDF($_POST['id']);
 
 ?>
