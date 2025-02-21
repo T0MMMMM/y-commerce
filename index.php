@@ -74,5 +74,7 @@
 
     <?php include 'includes/footer.php'; ?>
     <script src="javascript/actions.js"></script>
+    <script src="javascript/cart_actions.js"></script>
+
 </body>
 </html>

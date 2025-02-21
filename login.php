@@ -55,7 +55,7 @@
                 </div>
                 <div class="form-group terms">
                     <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms">J'accepte les <a href="#">conditions d'utilisation</a> et la <a href="#">politique de confidentialité</a></label>
+                    <label for="terms">J'accepte les <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley">conditions d'utilisation</a> et la <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley">politique de confidentialité</a></label>
                 </div>
                 <button type="submit" class="auth-button">S'inscrire</button>
                 <p class="auth-link">Vous avez déjà un compte? <a href="#" onclick="toggleCards()">Se connecter</a></p>
