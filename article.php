@@ -34,7 +34,7 @@ if ($article['slug'] !== $_GET['slug'] || $article["id"] !== (int) $_GET['id']) 
     
     <div class="single-article-container">
         <div class="article-image-container">
-            <img src="images/test_image.jpg" alt="<?= htmlspecialchars($article['name']) ?>" class="single-article-image">
+            <img src="<?= htmlspecialchars($article['image_link']) ?>" alt="<?= htmlspecialchars($article['name']) ?>" class="single-article-image">
         </div>
         <div class="article-info-container">
             <h1 class="single-article-title"><?= htmlspecialchars($article['name']) ?></h1>

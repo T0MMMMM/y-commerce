@@ -45,7 +45,7 @@ require_once 'api/utils/cart_utils.php';
                 <!-- Cart item 1 -->
                 <div class="cart-item">
                     <div class="cart-item-image">
-                        <img src="images/test_image.jpg" alt="Chemise blanche élégante">
+                        <img src="<?= htmlspecialchars($article['image_link']) ?>" alt="Chemise blanche élégante">
                     </div>
                     <div class="cart-item-details">
                         <h3 class="cart-item-name"><?= $article["name"] ?></h3>
