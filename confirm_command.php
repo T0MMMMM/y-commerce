@@ -42,7 +42,7 @@ if (empty($cart)) {
                         </div>
                         <div class="form-group">
                             <input type="text" id="postal_code" name="postal_code" placeholder="Code postal" required pattern="[0-9]{5}">
-                        </div>
+                        </div>  
                     </div>
                 </form>
             </div>
