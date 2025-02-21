@@ -90,6 +90,16 @@ function removeFromCart(product_id) {
 }
 
 function createCommand() {
+    const form = document.getElementById('shipping-form');
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
+    const address = document.getElementById('address').value;
+    const city = document.getElementById('city').value;
+    const postalCode = document.getElementById('postal_code').value;
+
     fetch('api/actions/command_actions.php', {
         method: 'POST',
         headers: {
@@ -97,7 +107,12 @@ function createCommand() {
         },
         credentials: 'include',
         body: JSON.stringify({
-            action: 'create_command'
+            action: 'create_command',
+            shipping_address: {
+                address: address,
+                city: city,
+                postal_code: postalCode
+            }
         })
     })
     .then(response => response.json())

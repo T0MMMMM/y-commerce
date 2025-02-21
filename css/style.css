@@ -1732,3 +1732,136 @@ body {
       border-top: 1px dashed #dee2e6;
     }
   }
+
+/* Confirm Command Page Styles */
+.confirm-container {
+    padding: 100px 5% 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.confirm-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.shipping-details, .order-review {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+}
+
+.shipping-details h2, .order-review h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.shipping-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #777;
+    box-shadow: 0 0 0 2px rgba(119, 119, 119, 0.1);
+}
+
+.order-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.order-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 15px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+}
+
+.order-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.item-details h3 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.item-details p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.order-summary {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.summary-row.balance {
+    color: #777;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.confirm-btn {
+    width: 100%;
+    background-color: #777;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+.confirm-btn:hover {
+    background-color: #666;
+}
+
+/* Responsive design for confirm command page */
+@media (max-width: 768px) {
+    .confirm-content {
+        grid-template-columns: 1fr;
+    }
+
+    .shipping-details {
+        order: 1;
+    }
+
+    .order-review {
+        order: 2;
+    }
+}

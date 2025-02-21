@@ -90,7 +90,7 @@ require_once 'api/utils/cart_utils.php';
                     <button class="apply-code">Appliquer</button>
                 </div>
                 
-                <button class="checkout-btn"  onclick="createCommand()">Passez votre commande </button>
+                <button class="checkout-btn" onclick="window.location.href='confirm_command.php'">Passez votre commande</button>
                 
                 <!-- <div class="secure-payment">
                     <i class="fas fa-lock"></i>
