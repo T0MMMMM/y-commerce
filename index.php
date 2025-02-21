@@ -37,10 +37,6 @@
             } else {
                 $articles = getAllArticles();
             }
-
-            usort($articles, function($a, $b) {
-                return $b["publication_date"] <=> $a["publication_date"];
-            });
             
 
             foreach ($articles as $article):

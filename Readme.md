@@ -39,29 +39,21 @@ Configurer PHP 8.
 Démarrer les serveurs Apache et MySQL.
 Configurer la base de données :
 
-Importer le fichier php_exam_db.sql dans phpMyAdmin pour créer la base de données et les tables nécessaires.
+Importer le fichier php_exam_fuster.sql dans phpMyAdmin pour créer la base de données.
 Lancer le projet :
 
+Activer les modules Apache et MySQL
 Placer le dossier php_exam dans le répertoire htdocs de XAMPP, MAMP ou /var/www pour LAMP.
-Accéder au projet via localhost/php_exam (ou localhost:8888/php_exam pour MAMP).
+Accéder au projet via localhost/y-commerce (ou localhost:8888/y-commerce pour MAMP).
 Structure du Projet
-Dossier php_exam : Contient tous les fichiers du projet.
+Dossier y-commerce : Contient tous les fichiers du projet.
 Fichier index.php : Page d'accueil du site.
-Dossier product : Contient les fichiers pour la gestion des articles.
-Dossier admin : Contient les fichiers pour le panneau d'administration.
-Contributions
-Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou à proposer une pull request.
-
-Licence
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
-
-
 
 LES UTILISATEURS
 
 ---------------------------------------
 
-ADMIN
+ADMIN             (Administrateur)
 dmepfodxs34
 
 Arnaud
@@ -70,5 +62,6 @@ B1Info
 Tomyyy
 B1Info
 
-
+Benjamin
+M2Info
 --------------------------------------

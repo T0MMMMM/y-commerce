@@ -21,7 +21,7 @@ function getArticleById($id) {
 function getAllArticles() {
     global $conn;
 
-    $sql = "SELECT * FROM article";
+    $sql = "SELECT * FROM article ORDER BY publication_date DESC";
     $result = $conn ->query($sql);
     $articles = [];
     if ($result->num_rows > 0) {
