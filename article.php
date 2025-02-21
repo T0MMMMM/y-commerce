@@ -78,6 +78,6 @@ if ($article['slug'] !== $_GET['slug'] || $article["id"] !== (int) $_GET['id']) 
     </div>
     
     <?php include 'includes/footer.php'; ?>
-    <script src="javascript/actions.js"></script>
+    <script src="javascript/cart_actions.js"></script>
 </body>
 </html>
