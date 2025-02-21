@@ -33,14 +33,14 @@ switch ($action) {
                               sendError(400, "Shipping address required");
                     }
 
-                    $address = $shipping_address["address"] . ", " . 
-                              $shipping_address["postal_code"] . " " . 
-                              $shipping_address["city"];
+                    $address = $shipping_address["address"];
+                    $postalCode = $shipping_address["postal_code"];
+                    $city = $shipping_address["city"];
 
                     checkCart($total);
                     checkBalance($total, $user);
                     
-                    $response = createCommand($cart, $total, $address);
+                    $response = createCommand($cart, $total, $address, $postalCode, $city);
                     $command_id = $response[1];
 
                     if (!$response[0])

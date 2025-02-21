@@ -13,7 +13,6 @@ if (!isset($_POST['id'])) {
 }
 
 // Classe pour générer la facture
-
 class PDF extends Fpdf {
     function Header() {
         $this->SetFont('Arial', 'B', 16);
@@ -43,6 +42,8 @@ function createPDF($command) {
     $client = $user["username"];
     $email = $user["mail"];
     $livraison = $command["adress"];
+    $codePostal = $command["postal_code"];
+    $ville = $command["city"];
     $date = $command["transaction_date"];
     $detailsId = json_decode($command['article_list']);
     $articlesDetails = [];
@@ -55,6 +56,8 @@ function createPDF($command) {
     $pdf->Cell(0, 10, "Client: $client", 0, 1);
     $pdf->Cell(0, 10, "Email: $email", 0, 1);
     $pdf->Cell(0, 10, "Adresse de livraison: $livraison", 0, 1);
+    $pdf->Cell(0, 10, "Code Postal: $codePostal", 0, 1);
+    $pdf->Cell(0, 10, "Ville: $ville", 0, 1);
     $pdf->Cell(0, 10, "Date: $date", 0, 1);
     $pdf->Ln(10);
 

@@ -25,11 +25,11 @@ function checkBalance($total, $user) {
                     sendError(200, "Insufficient balance");
 }
 
-function createCommand($cart, $total, $address) {
+function createCommand($cart, $total, $address, $postalCode, $city) {
 
           $array = createDetailsCommand($cart);
 
-          $response = createOrder($_SESSION["user"],$total, $array, $address);
+          $response = createOrder($_SESSION["user"],$total, $array, $address, $postalCode, $city);
 
           return $response;
 }

@@ -75,13 +75,13 @@ function createOrderDetails(int $ArticleId, int $Quantity): int {
     return $insertedId;
 }
 
-function createOrder(int $userId, int $totalAmount, array $articlesList, string $address = "Montpellier"): array {
+function createOrder(int $userId, int $totalAmount, array $articlesList, string $address, $postalCode, $city): array {
     global $conn;
-    $sql = "INSERT INTO `order` (user_id, transaction_date, total_price, article_list, adress) 
-        VALUES (?, NOW(), ?, ?, ?)";
+    $sql = "INSERT INTO `order` (user_id, transaction_date, total_price, article_list, adress, postal_code, city) 
+        VALUES (?, NOW(), ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $value = json_encode($articlesList);
-    $stmt->bind_param("iiss", $userId, $totalAmount, $value, $address);
+    $stmt->bind_param("iissss", $userId, $totalAmount, $value, $address, $postalCode, $city);
     
     $reponse = $stmt->execute();
     $insertedId = $conn->insert_id; 
