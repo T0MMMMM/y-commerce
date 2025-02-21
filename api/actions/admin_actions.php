@@ -12,17 +12,18 @@ if (!isset($_SESSION)) {
           session_start();
 }
 
-if (!isAdmin($_SESSION["user"])) {
-          sendError(400,"Access denied");
-}
-
 $jsonData = file_get_contents('php://input');
 $data = json_decode($jsonData, true);
 
 $action = $data["action"] ?? null;
 
 $article_id = $data["article_id"] ?? null;
+$article = is_null( $article_id ) ? null : getArticleById($article_id);
 $user_id = $data["user_id"] ?? null;
+
+if (!isAdmin($_SESSION["user"]) && ( ($article["owner_id"] != $_SESSION["user"]) || ($_SESSION["user"] != $user_id) ) ) {
+          sendError(400,"Access denied");
+}
 
 
 switch ($action) {

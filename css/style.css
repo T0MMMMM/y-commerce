@@ -1487,6 +1487,17 @@ body {
 .delete-btn {
     background-color: #dc3545;
     color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
 }
 
 .edit-btn:hover {
@@ -1864,4 +1875,15 @@ body {
     .order-review {
         order: 2;
     }
+}
+
+.danger-btn {
+    background-color: #dc3545;
+    color: white;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.danger-btn:hover {
+    background-color: #c82333;
 }
