@@ -21,15 +21,14 @@ $article_id = $data["article_id"] ?? null;
 $article = is_null( $article_id ) ? null : getArticleById($article_id);
 $user_id = $data["user_id"] ?? null;
 
-if (!isAdmin($_SESSION["user"]) && ( ($article["owner_id"] != $_SESSION["user"]) || ($_SESSION["user"] != $user_id) ) ) {
-          sendError(400,"Access denied");
-}
-
-
 switch ($action) {
           case 'delete_article':
 
                     checkId($article_id);
+
+                    if (!isAdmin($_SESSION["user"]) && ($article["owner_id"] != $_SESSION["user"])  ) {
+                        sendError(400,"Access denied");
+                    }
 
                     $response = removeArticle($article_id);
 
@@ -43,16 +42,19 @@ switch ($action) {
 
                     checkId($user_id);
 
-                    checkSelfDelete($user_id);
+                    if (!isAdmin($_SESSION["user"]) &&  ($_SESSION["user"] != $user_id && !is_null($user_id)) ) {
+                        sendError(400,"Access denied");
+                    }
 
                     if (!removeUserArticles($user_id))
                               sendError(400, "Error removing user articles");
-
+                    
                     $response = deleteUser($user_id);
 
-                    if ($response)
-                              sendSuccess(200, "User removed");
-                    else
+                    if ($response){
+                            session_destroy();
+                            sendSuccess(200, "User removed");
+                    }else
                               sendError(400, "Error removing user");
                     break;
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
     session_start();
     require_once "api/crud/crud_article.php";
     require_once "api/crud/crud_command.php";
