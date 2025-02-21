@@ -54,7 +54,9 @@ switch ($action) {
 
                     validatePasswords($user["password"],  $currentPassword, $newPassword );
 
-                    $response = updateUserPassword($id, $currentPassword, $newPassword);
+                    $newPasswordHashed = password_hash($newPassword, PASSWORD_BCRYPT);
+
+                    $response = updateUserPassword($id, $newPasswordHashed);
 
                     if ($response)
                               sendSuccess(200, "Password updated");

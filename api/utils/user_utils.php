@@ -22,8 +22,8 @@ function validatePasswords($realCurrentPasswordHash, $currentPassword, $newPassw
     if (strlen($newPassword) < 5) {
         sendError(200, "New password must be at least 5 characters long");
     }
-    if (!password_verify($currentPassword, hash: $realCurrentPasswordHash)) {
-        sendError(200, 'Incorrect current password');
+    if (!password_verify($currentPassword, $realCurrentPasswordHash)) {
+        sendError(200, "Current password is incorrect");
     }
 }
 

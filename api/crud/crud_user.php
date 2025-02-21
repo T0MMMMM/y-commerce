@@ -99,16 +99,11 @@ function updateUserModificationDate(int $id) {
     $stmt->close();
 }
 
-function updateUserPassword($userId, $currentPassword, $newPassword) {
+function updateUserPassword($userId, $newPassword) {
     global $conn;
-    $user = getUserById($userId);
-    if (!password_verify($currentPassword, $user['password'])) {
-        return false;
-    }
-    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
     $sql = "UPDATE user SET password = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("si", $hashedPassword, $userId);
+    $stmt->bind_param("si", $newPassword, $userId);
     return $stmt->execute();
 }
 

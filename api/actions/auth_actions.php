@@ -51,7 +51,7 @@ switch ($action) {
 
                     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-                    postUser($username, $mail,$password, $role);
+                    postUser($username, $mail,$hashedPassword, $role);
 
                     // LOGIN
                     $user = getUserByName($username);
