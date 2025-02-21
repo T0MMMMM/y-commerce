@@ -76,10 +76,15 @@ if (!$targetUser || ($targetUser['id'] !== $_SESSION['user'] && !isAdmin($_SESSI
                     Ajouter au solde
                 </button>
             </div>
+
+            <button onclick="deleteUser(<?=$_POST['id']?>)" class="user-action-btn danger-btn">
+                Supprimer le compte
+            </button>
         </div>
     </div>
     
     <?php include 'includes/footer.php'; ?>
     <script src="javascript/user_actions.js"></script>
+    <script src="javascript/admin_actions.js"></script>
 </body>
 </html>

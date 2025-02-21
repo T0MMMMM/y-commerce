@@ -65,10 +65,15 @@ if (!$article || $article['owner_id'] !== $_SESSION['user'] && !isAdmin($_SESSIO
                     Enregistrer les modifications
                 </button>
             </form>
+
+            <button onclick="deleteArticle(<?= $article['id'] ?>)" class="delete-btn danger-btn">
+                Supprimer l'article
+            </button>
         </div>
     </div>
     
     <?php include 'includes/footer.php'; ?>
     <script src="javascript/article_actions.js"></script>
+    <script src="javascript/admin_actions.js"></script>
 </body>
 </html>
