@@ -29,7 +29,7 @@ Ce projet consiste à créer un site e-commerce complet en utilisant PHP. Voici 
 
 1. **Cloner le dépôt** :
    ```bash
-   git clone <URL_DU_DEPOT>
+   git clone https://github.com/T0MMMMM/y-commerce.git
    ```
 
 Configurer l'environnement :
@@ -49,9 +49,9 @@ Structure du Projet
 Dossier y-commerce : Contient tous les fichiers du projet.
 Fichier index.php : Page d'accueil du site.
 
-LES UTILISATEURS
-
 ---------------------------------------
+
+LES UTILISATEURS
 
 ADMIN             (Administrateur)
 dmepfodxs34
