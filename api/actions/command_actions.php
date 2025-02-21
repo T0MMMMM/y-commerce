@@ -27,11 +27,20 @@ switch ($action) {
                     $total = getTotal($cart);
                     
                     $user = getUserById($_SESSION["user"]);
+                    $shipping_address = $data["shipping_address"] ?? null;
+
+                    if (!$shipping_address) {
+                              sendError(400, "Shipping address required");
+                    }
+
+                    $address = $shipping_address["address"] . ", " . 
+                              $shipping_address["postal_code"] . " " . 
+                              $shipping_address["city"];
 
                     checkCart($total);
                     checkBalance($total, $user);
                     
-                    $response = createCommand($cart, $total);
+                    $response = createCommand($cart, $total, $address);
                     $command_id = $response[1];
 
                     if (!$response[0])

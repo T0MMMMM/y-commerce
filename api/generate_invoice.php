@@ -1,27 +1,22 @@
 <?php
 
-require_once 'config.php';
-require_once 'admin.php';
-require_once 'crudUser.php';
-require_once 'crudArticles.php';
-require_once 'crudCommands.php';
+require_once "crud/crud_article.php";
+require_once "crud/crud_command.php";
+require_once "crud/crud_user.php";
 
-require_once 'vendor\autoload.php';
-use Fpdf\Fpdf; // Assure-toi d'importer FPDF, pas FPDI
+require_once '../vendor/autoload.php';
 
-// Classe pour générer la facture
-
-class PDF extends Fpdf {
+class PDF extends \TCPDF {
     function Header() {
-        $this->SetFont('Arial', 'B', 16);
+        $this->SetFont('helvetica', 'B', 16);
         $this->Cell(0, 10, 'Facture', 0, 1, 'C');
         $this->Ln(10);
     }
 
     function Footer() {
         $this->SetY(-15);
-        $this->SetFont('Arial', 'I', 8);
-        $this->Cell(0, 10, 'Page ' . $this->PageNo(), 0, 0, 'C');
+        $this->SetFont('helvetica', 'I', 8);
+        $this->Cell(0, 10, 'Page ' . $this->getAliasNumPage(), 0, 0, 'C');
     }
 }
 
@@ -32,8 +27,12 @@ function generatePDF(int $id_command) {
 
 function createPDF($command) {
     $pdf = new PDF();
+    $pdf->SetCreator('Y-Commerce');
+    $pdf->SetAuthor('Y-Commerce System');
+    $pdf->SetTitle('Facture');
+    
     $pdf->AddPage();
-    $pdf->SetFont('Arial', '', 12);
+    $pdf->SetFont('helvetica', '', 12);
 
     $facture_id = $command["id"];
     $user = getUserById($command['user_id']);
@@ -55,14 +54,14 @@ function createPDF($command) {
     $pdf->Cell(0, 10, "Date: $date", 0, 1);
     $pdf->Ln(10);
 
-    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->SetFont('helvetica', 'B', 12);
     $pdf->Cell(80, 10, "Article", 1);
     $pdf->Cell(30, 10, "Quantite", 1);
     $pdf->Cell(30, 10, "Prix", 1);
     $pdf->Cell(30, 10, "Total", 1);
     $pdf->Ln();
 
-    $pdf->SetFont('Arial', '', 12);
+    $pdf->SetFont('helvetica', '', 12);
     $total = 0;
 
     foreach ($articlesDetails as $articleDet) {
@@ -81,7 +80,7 @@ function createPDF($command) {
         $pdf->Ln();
     }
 
-    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->SetFont('helvetica', 'B', 12);
     $pdf->Cell(140, 10, "Total", 1);
     $pdf->Cell(30, 10, number_format($total, 2) . " Euros", 1);
     $pdf->Ln(10);
@@ -90,6 +89,6 @@ function createPDF($command) {
     exit;
 }
 
-
+generatePDF(11);
 
 ?>
