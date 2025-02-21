@@ -112,6 +112,6 @@ require_once 'api/utils/cart_utils.php';
     
     <!-- Font Awesome pour les icônes -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-    <script src="javascript/actions.js"></script>
+    <script src="javascript/cart_actions.js"></script>
 </body>
 </html>
